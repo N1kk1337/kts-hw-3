@@ -1,0 +1,32 @@
+.coin-list-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.coin-list__search,
+.coin-list__categories,
+.coin-list__tabs {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.coin-list__search {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.search-btn {
+  align-items: center;
+}
+.coin-list__list {
+  height: 700px;
+  overflow: 'auto';
+  display: 'flex';
+  flex-direction: 'column-reverse';
+}

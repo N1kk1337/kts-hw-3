@@ -1,0 +1,22 @@
+.input {
+  width: 100%;
+  background: #ffffff;
+  padding: 12px;
+  border: 1px solid #dfe2e4;
+  border-radius: 4px;
+  font-family: 'Circular Std';
+  font-style: normal;
+  font-weight: 450;
+  font-size: 12px;
+  line-height: 15px;
+  color: #dfe2e4;
+
+  &:focus {
+    color: #6c757d;
+    border: 1px solid #6c757d;
+  }
+  &:disabled {
+    background: #ffffff;
+    border: 1px solid #dfe2e4;
+  }
+}

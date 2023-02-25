@@ -1,0 +1,105 @@
+.coin-page {
+  display: flex;
+  width: 375px;
+  flex-direction: column;
+  gap: 16px;
+}
+.coin-info__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  border-bottom: 1px solid #dfe2e4;
+}
+
+.coin-price-container {
+  display: flex;
+  gap: 12px;
+}
+
+.coin-price {
+  font-family: 'Circular Std';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  color: #212529;
+}
+
+.coin-price-change {
+  font-family: 'Circular Std';
+  font-style: normal;
+  font-weight: 450;
+  font-size: 16px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  color: #21bf73;
+}
+.coin-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.coin__img {
+  width: 24px;
+  height: 24px;
+}
+
+.coin__title {
+  font-family: 'Circular Std';
+  font-style: normal;
+  font-weight: 450;
+  font-size: 16px;
+  line-height: 20px;
+  color: #212529;
+  margin-left: 4px;
+}
+
+.coin__subtitle {
+  font-family: 'Circular Std';
+  font-style: normal;
+  font-weight: 450;
+  font-size: 10px;
+  line-height: 13px;
+  color: #6c757d;
+}
+
+.coin-info__label {
+  font-family: 'Circular Std';
+  font-style: normal;
+  font-weight: 450;
+  font-size: 14px;
+  line-height: 18px;
+  color: #6c757d;
+}
+
+.coin-info__numbers {
+  font-family: 'Circular Std';
+  font-style: normal;
+  font-weight: 450;
+  font-size: 14px;
+  line-height: 18px;
+  color: #212529;
+}
+
+.description-header {
+  font-family: 'Circular Std';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #6c757d;
+}
+
+.description-text {
+  font-family: 'Circular Std';
+  font-style: normal;
+  font-weight: 450;
+  font-size: 14px;
+  line-height: 18px;
+  color: #212529;
+}

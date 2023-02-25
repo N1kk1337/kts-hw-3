@@ -1,0 +1,32 @@
+.checkbox{
+    width: 27px;
+    height: 27px;
+    cursor: pointer;
+    appearance: initial;
+    -webkit-appearance: initial;
+     position: relative;
+
+    /* Bg */
+    background: #FFFFFF;
+    /* Border color */
+    border: 1px solid #DFE2E4;
+    border-radius: 4px;
+    &:hover{
+        border: 1px solid #6C757D;
+    }
+    &:disabled{
+        opacity: 0.7;
+        border: 1px solid #DFE2E4;
+
+    }
+
+}
+input[type="checkbox"]:checked {
+    background: white;
+    background-image: url('../../../public/Check.png');
+    background-position: center 30%; 
+    background-repeat: no-repeat;
+}
+
+
+

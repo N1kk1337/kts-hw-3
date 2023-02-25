@@ -9,6 +9,7 @@ import './CoinListPage.scss';
 import { Card } from '@components/Card';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Loader } from '@components/Loader';
+import { useNavigate } from 'react-router-dom';
 
 export interface CoinData {
   id: string;
@@ -17,6 +18,14 @@ export interface CoinData {
   image: string;
   current_price: string;
   price_change_percentage_24h: string;
+  market_cap: {};
+  fully_diluted_valuation: {};
+  circulating_supply: string;
+  total_supply: string;
+  max_supply: string;
+  description: {
+    [key: string]: string;
+  };
 }
 
 export default function CoinListPage() {
@@ -26,6 +35,7 @@ export default function CoinListPage() {
   const [categories, setCategories] = useState<Option[]>([]);
   const [chosenCategories, setChosenCategories] = useState<Option[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const navigate = useNavigate();
 
   const handleInputChange = (value: string): void => {
     setInputValue(value);
@@ -33,6 +43,10 @@ export default function CoinListPage() {
 
   const handleSearch = () => {
     fetchCoins(inputValue);
+  };
+
+  const handleCoinClick = (id: string) => {
+    navigate(`/coins/${id}&currency=${inputValue === '' ? 'usd' : inputValue}`);
   };
 
   async function fetchCategories(): Promise<Option[]> {
@@ -73,10 +87,11 @@ export default function CoinListPage() {
   useEffect(() => {
     fetchCategories();
     fetchCoins();
-  });
+  }, []);
 
   useEffect(() => {
     console.log(currentPage);
+    console.log(coins);
     setSlicedCoins(coins.slice(0, 20 * currentPage));
   }, [currentPage, coins]);
 
@@ -127,6 +142,7 @@ export default function CoinListPage() {
             slicedCoins.map((coin) => {
               return (
                 <Card
+                  onClick={() => handleCoinClick(coin.id)}
                   key={coin.id}
                   image={coin.image}
                   title={coin.name}
