@@ -90,8 +90,6 @@ export default function CoinListPage() {
   }, []);
 
   useEffect(() => {
-    console.log(currentPage);
-    console.log(coins);
     setSlicedCoins(coins.slice(0, 20 * currentPage));
   }, [currentPage, coins]);
 

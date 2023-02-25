@@ -1,8 +1,7 @@
 import { Loader } from '@components/Loader';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
-import { CoinData } from '../CoinsListPage';
+import { useParams } from 'react-router-dom';
 import './CoinPage.scss';
 
 export interface SingleCoinData {
@@ -43,7 +42,6 @@ export default function CoinPage() {
 
     const url = `https://api.coingecko.com/api/v3/coins/${coinName}`;
     const response = await axios.get<SingleCoinData>(url);
-    console.log(coin);
     setCoin(response.data);
   }
   useEffect(() => {
@@ -51,8 +49,6 @@ export default function CoinPage() {
   }, []);
 
   useEffect(() => {
-    console.log(coin);
-
     setLoading(false);
   }, [coin]);
 
