@@ -1,0 +1,46 @@
+.button {
+  display: flex;
+  flex-direction: row;
+  background: #dfe2e4;
+  border-radius: 6px;
+  color: #343a40;
+  font-weight: 450;
+  font-size: 14px;
+  line-height: 18px;
+
+  font-family: 'Circular Std', sans-serif;
+  cursor: pointer;
+
+}
+
+.button * {
+  margin: 7px;
+  margin-right: 9px;
+}
+
+.button .loader_size-s {
+  margin: 6.2px 0 7.8px 8px;
+}
+
+.button .loader_size-s + * {
+  margin-left: 6px;
+}
+
+.button[disabled=true]{
+  opacity: 0.3;
+}
+
+.button div {
+  font-weight: 450;
+  font-size: 14px;
+  line-height: 18px;
+  font-family: 'Circular Std', sans-serif;
+}
+.button:hover {
+  opacity: 0.5;
+}
+
+.button_disabled{
+  opacity: 0.3 !important;
+}
+
