@@ -1,4 +1,4 @@
-import './Card.scss';
+import styles from "./Card.module.scss";
 
 export type CardProps = {
   /** URL изображения */
@@ -10,7 +10,7 @@ export type CardProps = {
   /** Содержимое карточки (футер/боковая часть), может быть пустым */
   content?: React.ReactNode;
   /** Клик на карточку */
-  onClick?: React.MouseEventHandler;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
   price: string;
   priceChange: string;
 };
@@ -26,19 +26,21 @@ export const Card: React.FC<CardProps> = ({
   ...props
 }) => {
   return (
-    <div onClick={onClick} className="card" {...props}>
-      <img className="card__img" src={image} alt="" />
+    <div onClick={onClick} className={styles["card"]} {...props}>
+      <img className={styles["card__img"]} src={image} alt="coin" />
 
       <div>
-        <h3 className="card__title">{title}</h3>
-        <h4 className="card__subtitle">{subtitle}</h4>
+        <h3 className={styles["card__title"]}>{title}</h3>
+        <h4 className={styles["card__subtitle"]}>{subtitle}</h4>
       </div>
-      <div className="card__price-container">
-        <p className="card__price">${price}</p>
-        <p className="card__change">{priceChange}%</p>
+      <div className={styles["card__price-container"]}>
+        <p className={styles["card__price"]}>${price}</p>
+        <p className={styles["card__change"]}>{priceChange}%</p>
       </div>
 
       {content}
     </div>
   );
 };
+
+export default Card;

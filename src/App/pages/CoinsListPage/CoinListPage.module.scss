@@ -1,8 +1,8 @@
 .coin-list-page {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   flex-wrap: nowrap;
+  justify-content: center;
   gap: 10px;
   overflow: hidden;
 }
@@ -25,8 +25,8 @@
   align-items: center;
 }
 .coin-list__list {
+  display: "flex";
+  flex-direction: "column-reverse";
   height: 700px;
-  overflow: 'auto';
-  display: 'flex';
-  flex-direction: 'column-reverse';
+  overflow: "auto";
 }

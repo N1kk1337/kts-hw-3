@@ -1,4 +1,4 @@
-import { Loader } from '../Loader/Loader';
+import { Loader } from "../Loader/Loader";
 
 export type WithLoaderProps = React.PropsWithChildren<{
   loading: boolean;
@@ -18,3 +18,5 @@ export const WithLoader: React.FC<WithLoaderProps> = ({
   }
   return <div>{props.children}</div>;
 };
+
+export default WithLoader;

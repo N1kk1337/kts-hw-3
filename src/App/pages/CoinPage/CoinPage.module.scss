@@ -1,15 +1,15 @@
 .coin-page {
   display: flex;
-  width: 375px;
   flex-direction: column;
   gap: 16px;
+  width: 375px;
 }
 .coin-info__item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 40px;
   border-bottom: 1px solid #dfe2e4;
+  height: 40px;
 }
 
 .coin-price-container {
@@ -18,25 +18,25 @@
 }
 
 .coin-price {
-  font-family: 'Circular Std';
+  display: flex;
+  align-items: center;
+  color: #212529;
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
   line-height: 30px;
-  display: flex;
-  align-items: center;
-  color: #212529;
+  font-family: "Circular Std";
 }
 
 .coin-price-change {
-  font-family: 'Circular Std';
+  display: flex;
+  align-items: center;
+  color: #21bf73;
   font-style: normal;
   font-weight: 450;
   font-size: 16px;
   line-height: 20px;
-  display: flex;
-  align-items: center;
-  color: #21bf73;
+  font-family: "Circular Std";
 }
 .coin-header {
   display: flex;
@@ -50,56 +50,56 @@
 }
 
 .coin__title {
-  font-family: 'Circular Std';
+  margin-left: 4px;
+  color: #212529;
   font-style: normal;
   font-weight: 450;
   font-size: 16px;
   line-height: 20px;
-  color: #212529;
-  margin-left: 4px;
+  font-family: "Circular Std";
 }
 
 .coin__subtitle {
-  font-family: 'Circular Std';
+  color: #6c757d;
   font-style: normal;
   font-weight: 450;
   font-size: 10px;
   line-height: 13px;
-  color: #6c757d;
+  font-family: "Circular Std";
 }
 
 .coin-info__label {
-  font-family: 'Circular Std';
+  color: #6c757d;
   font-style: normal;
   font-weight: 450;
   font-size: 14px;
   line-height: 18px;
-  color: #6c757d;
+  font-family: "Circular Std";
 }
 
 .coin-info__numbers {
-  font-family: 'Circular Std';
+  color: #212529;
   font-style: normal;
   font-weight: 450;
   font-size: 14px;
   line-height: 18px;
-  color: #212529;
+  font-family: "Circular Std";
 }
 
 .description-header {
-  font-family: 'Circular Std';
+  color: #6c757d;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
-  color: #6c757d;
+  font-family: "Circular Std";
 }
 
 .description-text {
-  font-family: 'Circular Std';
+  color: #212529;
   font-style: normal;
   font-weight: 450;
   font-size: 14px;
   line-height: 18px;
-  color: #212529;
+  font-family: "Circular Std";
 }

@@ -1,29 +1,22 @@
-import './CheckBox.scss';
+import styles from "./CheckBox.module.scss";
+
 /** Пропсы, которые принимает компонент CheckBox */
 export type CheckBoxProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
-  'onChange'
+  "onChange"
 > & {
   /** Вызывается при клике на чекбокс */
   onChange: (value: boolean) => void;
 };
 
-export const CheckBox: React.FC<CheckBoxProps> = ({
-  disabled,
-  checked,
-  onChange,
-  ...props
-}) => {
+export const CheckBox: React.FC<CheckBoxProps> = ({ onChange, ...props }) => {
   return (
-   <input
-    className="checkbox"
-    type="checkbox"
-    disabled={disabled}
-    checked={checked}
-    onChange={(event) => onChange(event.target.checked)}
-    {...props}
-  >
-
-  </input>
+    <input
+      className={styles["checkbox"]}
+      onChange={(event) => onChange(event.target.checked)}
+      {...props}
+    ></input>
   );
 };
+
+export default CheckBox;

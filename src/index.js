@@ -1,1 +1,1 @@
-require('./App/pages/index.tsx');
+require("./App/index.tsx");
