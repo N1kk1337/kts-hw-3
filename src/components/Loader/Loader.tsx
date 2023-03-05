@@ -33,7 +33,7 @@ export const Loader: React.FC<LoaderProps> = ({
 }) => {
   return (
     <div
-      className={classNames([styles["loader"], `size-${size}`])}
+      className={classNames(styles["loader"], styles[`size-${size}`])}
       {...props}
     />
   );

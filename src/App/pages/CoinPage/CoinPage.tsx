@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 
 import Loader from "@components/Loader";
 import { LoaderSize } from "@components/Loader/Loader";
-import axios from "axios";
+import { Meta } from "@utils/meta";
 import { observer } from "mobx-react-lite";
 import { useParams } from "react-router-dom";
 
+import SingleCoinStore from "../../../store/SingleCoinStore";
+import { useLocalStore } from "../../../store/useLocalStore";
 import styles from "./CoinPage.module.scss";
 
 export interface SingleCoinData {
@@ -31,53 +33,47 @@ export interface SingleCoinData {
 function CoinPage() {
   const { coinId } = useParams();
   const [currency, setCurrency] = useState("usd");
-  const [coin, setCoin] = useState<SingleCoinData>();
-  const [loading, setLoading] = useState(true);
+  const singleCoinStore = useLocalStore(() => new SingleCoinStore());
 
-  async function fetchCoin(curr: string = "usd") {
+  useEffect(() => {
     const [coinName, currencyCode] = coinId!.split("&currency=");
-    setCurrency(currencyCode || "usd");
+    setCurrency(currencyCode || "usd"); // todo на будущее
+    singleCoinStore.getSingleCoinData(coinName);
+  }, [coinId, singleCoinStore]);
 
-    const url = `https://api.coingecko.com/api/v3/coins/${coinName}`;
-    const response = await axios.get<SingleCoinData>(url);
-    setCoin(response.data);
-  }
-
-  useEffect(() => {
-    fetchCoin();
-  }, []);
-
-  useEffect(() => {
-    setLoading(false);
-  }, [coin]);
-
-  return !loading ? (
+  // почему лоадер не срабатывает?
+  return singleCoinStore.meta === Meta.loading ? (
+    <Loader size={LoaderSize.l}></Loader>
+  ) : (
     <div className={styles.coin__page}>
       <header className={styles["coin-header"]}>
         <button className={styles["coin__back-btn"]} />
         <img
           alt=""
-          src={coin?.image.small}
+          src={singleCoinStore.coin?.image.small}
           className={styles["coin__img"]}
         ></img>
-        <h1 className={styles["coin__title"]}>{coin && coin.name}</h1>
+        <h1 className={styles["coin__title"]}>
+          {singleCoinStore.coin && singleCoinStore.coin.name}
+        </h1>
         <h2 className={styles.coin__subtitle}>
-          ({coin && coin.symbol.toUpperCase()})
+          ({singleCoinStore.coin && singleCoinStore.coin.symbol.toUpperCase()})
         </h2>
       </header>
       <div className={styles["coin-price-container"]}>
         <span className={styles["coin-price"]}>
-          {coin?.market_data.current_price[currency!]}
+          {singleCoinStore.coin?.market_data.current_price[currency!]}
         </span>
         <span className={styles["coin-price-change"]}>
-          {coin && coin.market_data.price_change_percentage_24h}
+          {singleCoinStore.coin &&
+            singleCoinStore.coin.market_data.price_change_percentage_24h}
         </span>
       </div>
       <ul className={styles["coin-info__container"]}>
         <li className={styles["coin-info__item"]}>
           <span className={styles["coin-info__label"]}>Market Cap</span>
           <span className={styles["coin-info__numbers"]}>
-            {coin?.market_data.market_cap[currency!]}
+            {singleCoinStore.coin?.market_data.market_cap[currency!]}
           </span>
         </li>
         <li className={styles["coin-info__item"]}>
@@ -85,37 +81,41 @@ function CoinPage() {
             Fully Diluted Valuation
           </span>
           <span className={styles["coin-info__numbers"]}>
-            {coin?.market_data.fully_diluted_valuation[currency!]}
+            {
+              singleCoinStore.coin?.market_data.fully_diluted_valuation[
+                currency!
+              ]
+            }
           </span>
         </li>
         <li className={styles["coin-info__item"]}>
           <span className={styles["coin-info__label"]}>Circulating Supply</span>
           <span className={styles["coin-info__numbers"]}>
-            {coin?.market_data.circulating_supply}
+            {singleCoinStore.coin?.market_data.circulating_supply}
           </span>
         </li>
         <li className={styles["coin-info__item"]}>
           <span className={styles["coin-info__label"]}>Total Supply</span>
           <span className={styles["coin-info__numbers"]}>
-            {coin?.market_data.total_supply}
+            {singleCoinStore.coin?.market_data.total_supply}
           </span>
         </li>
         <li className={styles["coin-info__item"]}>
           <span className={styles["coin-info__label"]}>Max Supply</span>
           <span className={styles["coin-info__numbers"]}>
-            {coin?.market_data.max_supply}
+            {singleCoinStore.coin?.market_data.max_supply}
           </span>
         </li>
       </ul>
       <h3 className={styles["description-header"]}>Description</h3>
 
       <div
-        dangerouslySetInnerHTML={{ __html: coin?.description.en! }}
+        dangerouslySetInnerHTML={{
+          __html: singleCoinStore.coin?.description.en!,
+        }}
         className={styles["description-text"]}
       />
     </div>
-  ) : (
-    <Loader size={LoaderSize.l}></Loader>
   );
 }
 

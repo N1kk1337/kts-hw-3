@@ -1,11 +1,11 @@
 .multi-dropdown {
-  position: relative;
   display: flex;
+  position: relative;
   flex-direction: column;
   gap: 6px;
   box-sizing: border-box;
-  width: 369px;
   background: #ffffff;
+  width: 369px;
 
   &:focus {
     color: #343a40;
@@ -13,23 +13,23 @@
   }
 
   & button {
-    text-align: start;
-    background: #ffffff;
     border: 0.5px solid #dfe2e4;
     border-radius: 12px;
-    width: 100%;
+    background: #ffffff;
+    background-image: url("../../../public/arrow.png");
+    background-position: right 8px center;
+    background-repeat: no-repeat;
     padding-top: 5px;
-    padding-left: 8px;
     padding-bottom: 3px;
-    font-family: 'Circular Std', sans-serif;
+    padding-left: 8px;
+    width: 100%;
+    color: #6c757d;
     font-style: normal;
     font-weight: 450;
     font-size: 12px;
     line-height: 15px;
-    color: #6c757d;
-    background-image: url('../../../public/arrow.png');
-    background-position: right 8px center;
-    background-repeat: no-repeat;
+    font-family: "Circular Std", sans-serif;
+    text-align: start;
     &:disabled {
       background: #f8f9fa;
     }
@@ -37,53 +37,51 @@
 }
 
 .options-container {
+  display: flex;
   position: absolute;
   top: 31px;
-  z-index: 9;
-  display: flex;
-  overflow: hidden;
   flex-direction: column;
-  border: 0.5px solid #dfe2e4;
-  height: 400px;
-  overflow: scroll;
-  background-color: #dfe2e4;
-  width: 369px;
+  z-index: 9;
+  border: 0.5px solid #f8f9fa;
 
   border-radius: 12px;
-  font-family: 'Circular Std', sans-serif;
+  background-color: #f8f9fa;
+  width: 369px;
+  height: 400px;
+  overflow: hidden;
+  overflow: scroll;
+  color: #343a40;
   font-style: normal;
   font-weight: 450;
   font-size: 12px;
   line-height: 15px;
-  color: #343a40;
+  font-family: "Circular Std", sans-serif;
   & :not(:first-child) {
-    border-top: 0.5px solid #dfe2e4;
+    border-top: 0.5px solid #f8f9fa;
   }
   & input {
     visibility: hidden;
     max-height: 0;
   }
-  & :has(> input:checked) {
-    background: #f8f9fa;
-  }
 }
-
 .option {
   z-index: 10;
+  cursor: pointer;
   width: 100%;
+
   & label {
-    padding: 5px 8px 3px;
     display: inline-block;
-    font-family: 'Circular Std', sans-serif;
+    padding: 5px 8px 3px;
+    width: 100%;
+    color: #343a40;
     font-style: normal;
     font-weight: 450;
     font-size: 12px;
     line-height: 15px;
-    color: #343a40;
-    width: 100%;
+    font-family: "Circular Std", sans-serif;
   }
 }
 
 .selected {
-  background: #f8f9fa;
+  background: #dfe2e4;
 }

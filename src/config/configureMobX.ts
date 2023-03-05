@@ -1,6 +1,6 @@
 import { configure } from "mobx";
 
-configure({
+export default configure({
   useProxies: "ifavailable",
   computedRequiresReaction: true,
   reactionRequiresObservable: true,
