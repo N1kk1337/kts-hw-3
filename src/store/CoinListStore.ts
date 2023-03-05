@@ -17,7 +17,7 @@ type PrivateFields = "_list" | "_meta" | "_page";
 class CoinListStore implements ILocalStore {
   // private _currency = "usd";
   private _meta: Meta = Meta.initial;
-  private _list: CoinData[] | undefined;
+  private _list: CoinData[] = [];
   private _page: number = 1;
 
   constructor() {
@@ -44,24 +44,36 @@ class CoinListStore implements ILocalStore {
     return this._page;
   }
 
+  getNextPage(search: string) {
+    this._page++;
+    this.getCoinListData(search);
+  }
+
   async getCoinListData(search: string, categories?: string[]) {
     if (search.trim() === "") search = "usd";
     this._meta = Meta.loading;
-    this._list = undefined;
     const response = await axios.get<CoinData[]>(
-      `${BASE_URL}/coins/markets/?vs_currency=${search}
+      `${BASE_URL}/coins/markets/?vs_currency=${search}&per_page=50&page=${this._page}
       `,
     );
     runInAction(() => {
       if (response.status === 200) {
-        this._list = response.data;
-        this._meta = Meta.success;
+        if (this._page === 1) {
+          this._list = response.data;
+          this._meta = Meta.success;
+        } else {
+          this._list = [...this._list!, ...response.data];
+          this._meta = Meta.success;
+        }
         return;
       }
       this._meta = Meta.error;
     });
   }
-  destroy(): void {}
+  destroy(): void {
+    this._list = [];
+    this._page = 1;
+  }
 }
 
 export default CoinListStore;

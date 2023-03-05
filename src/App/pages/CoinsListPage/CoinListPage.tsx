@@ -58,19 +58,14 @@ function CoinListPage() {
     );
   };
 
-  const getMoreCoins = async () => {
-    setCurrentPage(currentPage + 1);
-  };
-
   useEffect(() => {
     coinCategoryListStore.getCoinCategoryListData();
     coinListStore.getCoinListData(inputValue);
   }, []);
 
-  useEffect(() => {
-    //coinListStore.getCoinListData(inputValue);
-    setCurrentPage(1);
-  }, [chosenCategories]);
+  // useEffect(() => {
+  //   //coinListStore.getCoinListData(inputValue);
+  // }, [chosenCategories]);
 
   // пока у нас нет обработчика ошибок пусть будет так
   return coinListStore.meta !== Meta.success &&
@@ -104,7 +99,7 @@ function CoinListPage() {
         {coinListStore.list && (
           <InfiniteScroll
             dataLength={coinListStore.list.length}
-            next={getMoreCoins}
+            next={() => coinListStore.getNextPage(inputValue)}
             hasMore={true}
             loader={<Loader></Loader>}
             height="700px"
@@ -115,7 +110,7 @@ function CoinListPage() {
             }
           >
             {coinListStore.list &&
-              coinListStore.list.map((coin) => {
+              Array.from(coinListStore.list).map((coin) => {
                 return (
                   <Card
                     onClick={() => handleCoinClick(coin.id)}
