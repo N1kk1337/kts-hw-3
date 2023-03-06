@@ -9,6 +9,7 @@ import MultiDropdown from "@components/MultiDropdown";
 import { Option } from "@components/MultiDropdown/MultiDropdown";
 import CoinCategoryListStore from "@stores/CoinCategoryListStore";
 import CoinListStore from "@stores/CoinListStore";
+import { CurrencyCode } from "@utils/currency";
 import { Meta } from "@utils/meta";
 import { observer, useLocalStore } from "mobx-react-lite";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -34,13 +35,14 @@ export interface CoinData {
 }
 
 function CoinListPage() {
-  const [inputValue, setInputValue] = useState("");
+  const [searchInputValue, setSearchInputValue] = useState("");
+  const [currency, setCurrency] = useState<CurrencyCode>(CurrencyCode.USD);
+
   const [chosenCategories, setChosenCategories] = useState<Option[]>([]);
-  const [currentPage, setCurrentPage] = useState<number>(1);
   const navigate = useNavigate();
 
   const handleInputChange = (value: string): void => {
-    setInputValue(value);
+    setSearchInputValue(value);
   };
 
   const coinListStore = useLocalStore(() => new CoinListStore());
@@ -49,23 +51,28 @@ function CoinListPage() {
   );
 
   const handleSearch = () => {
-    coinListStore.getCoinListData(inputValue);
+    if (searchInputValue.toUpperCase() in CurrencyCode) {
+      setCurrency(
+        CurrencyCode[
+          searchInputValue.toUpperCase() as keyof typeof CurrencyCode
+        ],
+      );
+    }
+    coinListStore.getCoinListData(searchInputValue);
   };
 
   const handleCoinClick = (id: string) => {
     navigate(
-      `/coins/${id}&currency=${inputValue.trim() === "" ? "usd" : inputValue}`,
+      `/coins/${id}&currency=${
+        searchInputValue.trim() === "" ? "usd" : searchInputValue
+      }`,
     );
   };
 
   useEffect(() => {
     coinCategoryListStore.getCoinCategoryListData();
-    coinListStore.getCoinListData(inputValue);
+    coinListStore.getCoinListData(searchInputValue);
   }, []);
-
-  // useEffect(() => {
-  //   //coinListStore.getCoinListData(inputValue);
-  // }, [chosenCategories]);
 
   // пока у нас нет обработчика ошибок пусть будет так
   return coinListStore.meta !== Meta.success &&
@@ -76,7 +83,7 @@ function CoinListPage() {
       <div className={styles["coin-list__search"]}>
         <Input
           placeholder="Search Cryptocurrency"
-          value={inputValue}
+          value={searchInputValue}
           onChange={handleInputChange}
         ></Input>
         <Button onClick={handleSearch} className={styles["search-btn"]}>
@@ -95,11 +102,12 @@ function CoinListPage() {
         />
       </div>
       <div className={styles["coin-list__tabs"]}></div>
-      <div className={styles["coin-list__list"]}>
+      <div>
         {coinListStore.list && (
           <InfiniteScroll
+            className={styles["coin-list__list"]}
             dataLength={coinListStore.list.length}
-            next={() => coinListStore.getNextPage(inputValue)}
+            next={() => coinListStore.getNextPage(searchInputValue)}
             hasMore={true}
             loader={<Loader></Loader>}
             height="700px"
@@ -118,7 +126,7 @@ function CoinListPage() {
                     image={coin.image}
                     title={coin.name}
                     subtitle={coin.symbol.toUpperCase()}
-                    price={coin.current_price}
+                    price={`${currency} ${coin.current_price}`}
                     priceChange={coin.price_change_percentage_24h}
                   ></Card>
                 );

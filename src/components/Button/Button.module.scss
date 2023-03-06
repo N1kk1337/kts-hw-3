@@ -1,16 +1,17 @@
+@use "../../styles/mixins.scss" as *;
+
 .button {
   display: flex;
   flex-direction: row;
-  background: #dfe2e4;
+  cursor: pointer;
   border-radius: 6px;
+  background: $background;
   color: #343a40;
   font-weight: 450;
   font-size: 14px;
   line-height: 18px;
 
-  font-family: 'Circular Std', sans-serif;
-  cursor: pointer;
-
+  font-family: "Circular Std", sans-serif;
 }
 
 .button * {
@@ -26,21 +27,20 @@
   margin-left: 6px;
 }
 
-.button[disabled=true]{
+.button[disabled="true"] {
   opacity: 0.3;
 }
 
 .button div {
-  font-weight: 450;
-  font-size: 14px;
-  line-height: 18px;
-  font-family: 'Circular Std', sans-serif;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  font-family: "Circular Std", sans-serif;
 }
 .button:hover {
   opacity: 0.5;
 }
 
-.button_disabled{
+.button_disabled {
   opacity: 0.3 !important;
 }
-

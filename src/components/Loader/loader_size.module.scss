@@ -1,3 +1,5 @@
+@use "../../styles/mixins.scss" as *;
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -14,20 +16,20 @@
   border-radius: 50%;
 }
 .size-m {
-  border: 4.5px solid #6c757d;
+  border: 4.5px solid $subtext;
   border-bottom: 4.5px solid rgba(255, 255, 255, 0);
   width: 40px;
   height: 40px;
 }
 .size-s {
-  border: 3px solid #6c757d;
+  border: 3px solid $subtext;
   border-bottom: 3px solid rgba(255, 255, 255, 0);
   width: 20px;
   height: 20px;
 }
 
 .size-l {
-  border: 6px solid #6c757d;
+  border: 6px solid $subtext;
   border-bottom: 6px solid rgba(255, 255, 255, 0);
   width: 60px;
   height: 60px;

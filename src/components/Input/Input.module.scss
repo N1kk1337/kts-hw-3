@@ -1,22 +1,24 @@
+@use "../../styles/mixins.scss" as *;
+
 .input {
-  width: 100%;
+  border: 1px solid $background;
+  border-radius: 4px;
   background: #ffffff;
   padding: 12px;
-  border: 1px solid #dfe2e4;
-  border-radius: 4px;
-  font-family: 'Circular Std';
+  width: 100%;
+  color: $background;
   font-style: normal;
   font-weight: 450;
   font-size: 12px;
   line-height: 15px;
-  color: #dfe2e4;
+  font-family: "Circular Std";
 
   &:focus {
-    color: #6c757d;
-    border: 1px solid #6c757d;
+    border: 1px solid $subtext;
+    color: $subtext;
   }
   &:disabled {
+    border: 1px solid $background;
     background: #ffffff;
-    border: 1px solid #dfe2e4;
   }
 }

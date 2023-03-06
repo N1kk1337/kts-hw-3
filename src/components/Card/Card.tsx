@@ -34,7 +34,7 @@ export const Card: React.FC<CardProps> = ({
         <h4 className={styles["card__subtitle"]}>{subtitle}</h4>
       </div>
       <div className={styles["card__price-container"]}>
-        <p className={styles["card__price"]}>${price}</p>
+        <p className={styles["card__price"]}>{price}</p>
         <p className={styles["card__change"]}>{priceChange}%</p>
       </div>
 
