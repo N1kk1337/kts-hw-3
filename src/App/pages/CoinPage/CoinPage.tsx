@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 
 import Loader from "@components/Loader";
 import { LoaderSize } from "@components/Loader/Loader";
+import SingleCoinStore from "@stores/SingleCoinStore";
+import { useLocalStore } from "@stores/useLocalStore";
 import { Meta } from "@utils/meta";
 import { observer } from "mobx-react-lite";
 import { useParams } from "react-router-dom";
 
-import SingleCoinStore from "../../../store/SingleCoinStore";
-import { useLocalStore } from "../../../store/useLocalStore";
 import styles from "./CoinPage.module.scss";
 
 export interface SingleCoinData {

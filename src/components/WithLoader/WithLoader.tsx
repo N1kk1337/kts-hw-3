@@ -1,4 +1,4 @@
-import { Loader } from "../Loader/Loader";
+import Loader from "@components/Loader";
 
 export type WithLoaderProps = React.PropsWithChildren<{
   loading: boolean;
