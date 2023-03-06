@@ -1,32 +1,27 @@
-.checkbox{
-    width: 27px;
-    height: 27px;
-    cursor: pointer;
-    appearance: initial;
-    -webkit-appearance: initial;
-     position: relative;
+@use "../../styles/mixins.scss" as *;
 
-    /* Bg */
-    background: #FFFFFF;
-    /* Border color */
-    border: 1px solid #DFE2E4;
-    border-radius: 4px;
-    &:hover{
-        border: 1px solid #6C757D;
-    }
-    &:disabled{
-        opacity: 0.7;
-        border: 1px solid #DFE2E4;
+.checkbox {
+  position: relative;
+  appearance: initial;
+  -webkit-appearance: initial;
+  cursor: pointer;
+  border: 1px solid $background;
+  border-radius: 4px;
 
-    }
-
+  background: #ffffff;
+  width: 27px;
+  height: 27px;
+  &:hover {
+    border: 1px solid $subtext;
+  }
+  &:disabled {
+    opacity: 0.7;
+    border: 1px solid $background;
+  }
 }
 input[type="checkbox"]:checked {
-    background: white;
-    background-image: url('../../../public/Check.png');
-    background-position: center 30%; 
-    background-repeat: no-repeat;
+  background: white;
+  background-image: url("../../assets/images/Check.png");
+  background-position: center 30%;
+  background-repeat: no-repeat;
 }
-
-
-
