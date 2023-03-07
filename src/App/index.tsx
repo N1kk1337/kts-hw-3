@@ -1,6 +1,7 @@
 import React from "react";
 
 import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 
 import mobXconfig from "../config/configureMobX";
 import App from "./App";
@@ -11,8 +12,10 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <div className={styles.container}>
-      <App />
-    </div>
+    <BrowserRouter>
+      <div className={styles.container}>
+        <App />
+      </div>
+    </BrowserRouter>
   </React.StrictMode>,
 );

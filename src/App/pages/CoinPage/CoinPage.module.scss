@@ -6,6 +6,17 @@
   gap: 16px;
   background-color: #fff;
 }
+
+.coin__back-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 16px;
+  border: 0;
+  background: rgba(0, 0, 0, 0);
+}
+
 .coin-info__item {
   display: flex;
   justify-content: space-between;

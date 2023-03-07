@@ -4,21 +4,25 @@ import axios from "axios";
 import {
   action,
   computed,
+  IReactionDisposer,
   makeObservable,
   observable,
+  reaction,
   runInAction,
 } from "mobx";
 import { CoinData } from "src/App/pages/CoinsListPage/CoinListPage";
 
+import rootStore from "./RootStore/instance";
 import { ILocalStore } from "./useLocalStore";
 
-type PrivateFields = "_list" | "_meta" | "_page";
+type PrivateFields = "_list" | "_meta" | "_page" | "_currency";
 
 class CoinListStore implements ILocalStore {
-  // private _currency = "usd";
   private _meta: Meta = Meta.initial;
   private _list: CoinData[] = [];
   private _page: number = 1;
+  private _currency: string =
+    (rootStore.query.getParam("vs_currency") as string) || "usd";
 
   constructor() {
     makeObservable<CoinListStore, PrivateFields>(this, {
@@ -26,8 +30,10 @@ class CoinListStore implements ILocalStore {
       _list: observable,
       _meta: observable,
       _page: observable,
+      _currency: observable,
       meta: computed,
       list: computed,
+      currency: computed,
       getCoinListData: action.bound,
     });
   }
@@ -42,6 +48,10 @@ class CoinListStore implements ILocalStore {
 
   get page(): number {
     return this._page;
+  }
+
+  get currency(): string {
+    return this._currency;
   }
 
   getNextPage(search: string) {
@@ -74,6 +84,13 @@ class CoinListStore implements ILocalStore {
     this._list = [];
     this._page = 1;
   }
+  private readonly _qpReaction: IReactionDisposer = reaction(
+    () => rootStore.query.getParam("vs_currency"),
+    (currency) => {
+      if (currency) this._currency = currency as string;
+      else this._currency = "usd";
+    },
+  );
 }
 
 export default CoinListStore;

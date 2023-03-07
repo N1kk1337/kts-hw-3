@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import Loader from "@components/Loader";
 import { LoaderSize } from "@components/Loader/Loader";
+import backArrow from "@images/back_arrow.svg";
+import rootStore from "@stores/RootStore/instance";
 import SingleCoinStore from "@stores/SingleCoinStore";
 import { useLocalStore } from "@stores/useLocalStore";
+import { CurrencyCode } from "@utils/currency";
 import { Meta } from "@utils/meta";
 import { observer } from "mobx-react-lite";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import styles from "./CoinPage.module.scss";
 
@@ -36,22 +39,35 @@ function CoinPage() {
   const singleCoinStore = useLocalStore(() => new SingleCoinStore());
 
   useEffect(() => {
-    const [coinName, currencyCode] = coinId!.split("&currency=");
-    setCurrency(currencyCode || "usd"); // todo на будущее
+    const coinName = coinId!.split("?vs_currency=")[0];
     singleCoinStore.getSingleCoinData(coinName);
-  }, [coinId, singleCoinStore]);
+    const currencyCode = singleCoinStore.currency;
+    setCurrency(CurrencyCode[currencyCode as keyof typeof CurrencyCode]);
+  }, [coinId, currency, singleCoinStore]);
 
-  if (!singleCoinStore.coin) {
-    return <p>There is no such coin</p>;
-  }
+  // const coinName = rootStore.query.getParam("");
+  // const currencyCode = rootStore.query.getParam("currency");
+  // setCurrency(CurrencyCode[currencyCode as keyof typeof CurrencyCode]);
+
+  const navigate = useNavigate();
+
+  const handleBackClick = useCallback(() => {
+    navigate("/");
+  }, []);
+
   if (singleCoinStore.meta === Meta.loading) {
     return <Loader size={LoaderSize.l} />;
+  }
+  if (!singleCoinStore.coin) {
+    return <p>There is no such coin</p>;
   }
 
   return (
     <div className={styles["coin-page"]}>
       <header className={styles["coin-header"]}>
-        <button className={styles["coin__back-btn"]} />
+        <button onClick={handleBackClick} className={styles["coin__back-btn"]}>
+          <img src={backArrow} alt="back" />
+        </button>
         <img
           alt=""
           src={singleCoinStore.coin?.image.small}
@@ -64,7 +80,17 @@ function CoinPage() {
       </header>
       <div className={styles["coin-price-container"]}>
         <span className={styles["coin-price"]}>
-          {singleCoinStore.coin.market_data.current_price[currency!]}
+          {
+            CurrencyCode[
+              singleCoinStore.currency.toUpperCase() as keyof typeof CurrencyCode
+            ]
+          }
+
+          {
+            singleCoinStore.coin.market_data.current_price[
+              singleCoinStore.currency!
+            ]
+          }
         </span>
         <span className={styles["coin-price-change"]}>
           {singleCoinStore.coin.market_data.price_change_percentage_24h}
@@ -74,7 +100,16 @@ function CoinPage() {
         <li className={styles["coin-info__item"]}>
           <span className={styles["coin-info__label"]}>Market Cap</span>
           <span className={styles["coin-info__numbers"]}>
-            {singleCoinStore.coin.market_data.market_cap[currency!] || "∞"}
+            {
+              CurrencyCode[
+                singleCoinStore.currency.toUpperCase() as keyof typeof CurrencyCode
+              ]
+            }{" "}
+            {
+              singleCoinStore.coin.market_data.market_cap[
+                singleCoinStore.currency!
+              ]
+            }
           </span>
         </li>
         <li className={styles["coin-info__item"]}>
@@ -83,8 +118,13 @@ function CoinPage() {
           </span>
           <span className={styles["coin-info__numbers"]}>
             {
+              CurrencyCode[
+                singleCoinStore.currency.toUpperCase() as keyof typeof CurrencyCode
+              ]
+            }{" "}
+            {
               singleCoinStore.coin.market_data.fully_diluted_valuation[
-                currency!
+                singleCoinStore.currency!
               ]
             }
           </span>

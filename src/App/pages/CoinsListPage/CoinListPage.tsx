@@ -14,7 +14,7 @@ import { CurrencyCode } from "@utils/currency";
 import { Meta } from "@utils/meta";
 import { observer, useLocalStore } from "mobx-react-lite";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import styles from "./CoinListPage.module.scss";
 
@@ -36,36 +36,51 @@ export interface CoinData {
 }
 
 function CoinListPage() {
-  const [searchInputValue, setSearchInputValue] = useState("");
-  const [currency, setCurrency] = useState<CurrencyCode>(CurrencyCode.USD);
+  const coinListStore = useLocalStore(() => new CoinListStore());
+  const coinCategoryListStore = useLocalStore(
+    () => new CoinCategoryListStore(),
+  );
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [searchParams, setSearchParams] = useSearchParams(
+    coinListStore.currency,
+  );
+  const [searchInputValue, setSearchInputValue] = useState(
+    coinListStore.currency,
+  );
 
+  const [currency, setCurrency] = useState<CurrencyCode>(
+    CurrencyCode[
+      coinListStore.currency.toUpperCase() as keyof typeof CurrencyCode
+    ],
+  );
   const [chosenCategories, setChosenCategories] = useState<Option[]>([]);
   const navigate = useNavigate();
 
   const handleInputChange = (value: string): void => {
     setSearchInputValue(value);
+    setSearchParams(`?vs_currency=${value}`);
   };
-
-  const coinListStore = useLocalStore(() => new CoinListStore());
-  const coinCategoryListStore = useLocalStore(
-    () => new CoinCategoryListStore(),
-  );
 
   const handleSearch = () => {
     if (searchInputValue.toUpperCase() in CurrencyCode) {
+      rootStore.query.setSearch(searchInputValue);
       setCurrency(
         CurrencyCode[
           searchInputValue.toUpperCase() as keyof typeof CurrencyCode
         ],
       );
+      coinListStore.getCoinListData(searchInputValue);
+    } else {
+      setCurrency(CurrencyCode.USD);
+      rootStore.query.setSearch("usd");
+      coinListStore.getCoinListData("usd");
+      setSearchParams(`?vs_currency=usd`);
     }
-    coinListStore.getCoinListData(searchInputValue);
   };
 
   const handleCoinClick = (id: string) => {
-    rootStore;
     navigate(
-      `/coins/${id}?currency=${
+      `/coins/${id}?vs_currency=${
         searchInputValue.trim() === "" ? "usd" : searchInputValue
       }`,
     );
@@ -73,13 +88,10 @@ function CoinListPage() {
 
   useEffect(() => {
     coinCategoryListStore.getCoinCategoryListData();
-    coinListStore.getCoinListData(searchInputValue);
+    coinListStore.getCoinListData(coinListStore.currency);
   }, []);
 
-  if (
-    coinListStore.meta === Meta.loading ||
-    coinCategoryListStore.meta === Meta.loading
-  ) {
+  if (coinCategoryListStore.meta === Meta.loading) {
     return <Loader size={LoaderSize.l} />;
   }
 
