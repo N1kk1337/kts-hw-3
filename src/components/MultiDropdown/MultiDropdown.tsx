@@ -24,7 +24,6 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
   onChange,
   disabled,
   pluralizeOptions,
-  ...props
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -47,28 +46,30 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
         {pluralizeOptions(value) || ""}
       </button>
       {open && !disabled && (
-        <div className={styles["options-container"]}>
-          {options.map((option) => (
-            <div
-              className={classNames(
-                styles.option,
-                value.some((o) => o.key === option.key) && styles.selected,
-              )}
-              key={option.key}
-            >
-              <label>
-                {option.value}
-                <input
-                  id={option.key}
-                  data-key={option.key}
-                  type="checkbox"
-                  onChange={() => {
-                    onChange(updatedValues(option.key));
-                  }}
-                />
-              </label>
-            </div>
-          ))}
+        <div className={styles["scroll-container"]}>
+          <div className={styles["options-container"]}>
+            {options.map((option) => (
+              <div
+                className={classNames(
+                  styles.option,
+                  value.some((o) => o.key === option.key) && styles.selected,
+                )}
+                key={option.key}
+              >
+                <label>
+                  {option.value}
+                  <input
+                    id={option.key}
+                    data-key={option.key}
+                    type="checkbox"
+                    onChange={() => {
+                      onChange(updatedValues(option.key));
+                    }}
+                  />
+                </label>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>

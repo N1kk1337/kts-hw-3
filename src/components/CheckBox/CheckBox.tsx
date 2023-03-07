@@ -13,9 +13,11 @@ export const CheckBox: React.FC<CheckBoxProps> = ({ onChange, ...props }) => {
   return (
     <input
       className={styles["checkbox"]}
-      onChange={(event) => onChange(event.target.checked)}
+      onChange={(event) => {
+        if (props.disabled) return onChange(event.target.checked);
+      }}
       {...props}
-    ></input>
+    />
   );
 };
 

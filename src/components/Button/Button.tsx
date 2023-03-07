@@ -1,5 +1,5 @@
 import Loader from "@components/Loader";
-import LoaderSize from "@components/Loader";
+import { LoaderSize } from "@components/Loader";
 import classNames from "classnames";
 
 import styles from "./Button.module.scss";

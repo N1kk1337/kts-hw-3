@@ -41,39 +41,40 @@ function CoinPage() {
     singleCoinStore.getSingleCoinData(coinName);
   }, [coinId, singleCoinStore]);
 
-  // почему лоадер не срабатывает?
-  return singleCoinStore.meta === Meta.loading ? (
-    <Loader size={LoaderSize.l}></Loader>
-  ) : (
-    <div className={styles.coin__page}>
+  if (!singleCoinStore.coin) {
+    return <p>There is no such coin</p>;
+  }
+  if (singleCoinStore.meta === Meta.loading) {
+    return <Loader size={LoaderSize.l} />;
+  }
+
+  return (
+    <div className={styles["coin-page"]}>
       <header className={styles["coin-header"]}>
         <button className={styles["coin__back-btn"]} />
         <img
           alt=""
           src={singleCoinStore.coin?.image.small}
           className={styles["coin__img"]}
-        ></img>
-        <h1 className={styles["coin__title"]}>
-          {singleCoinStore.coin && singleCoinStore.coin.name}
-        </h1>
+        />
+        <h1 className={styles["coin__title"]}>{singleCoinStore.coin.name}</h1>
         <h2 className={styles.coin__subtitle}>
-          ({singleCoinStore.coin && singleCoinStore.coin.symbol.toUpperCase()})
+          ({singleCoinStore.coin.symbol.toUpperCase()})
         </h2>
       </header>
       <div className={styles["coin-price-container"]}>
         <span className={styles["coin-price"]}>
-          {singleCoinStore.coin?.market_data.current_price[currency!]}
+          {singleCoinStore.coin.market_data.current_price[currency!]}
         </span>
         <span className={styles["coin-price-change"]}>
-          {singleCoinStore.coin &&
-            singleCoinStore.coin.market_data.price_change_percentage_24h}
+          {singleCoinStore.coin.market_data.price_change_percentage_24h}
         </span>
       </div>
       <ul className={styles["coin-info__container"]}>
         <li className={styles["coin-info__item"]}>
           <span className={styles["coin-info__label"]}>Market Cap</span>
           <span className={styles["coin-info__numbers"]}>
-            {singleCoinStore.coin?.market_data.market_cap[currency!]}
+            {singleCoinStore.coin.market_data.market_cap[currency!]}
           </span>
         </li>
         <li className={styles["coin-info__item"]}>
@@ -82,7 +83,7 @@ function CoinPage() {
           </span>
           <span className={styles["coin-info__numbers"]}>
             {
-              singleCoinStore.coin?.market_data.fully_diluted_valuation[
+              singleCoinStore.coin.market_data.fully_diluted_valuation[
                 currency!
               ]
             }
@@ -91,19 +92,19 @@ function CoinPage() {
         <li className={styles["coin-info__item"]}>
           <span className={styles["coin-info__label"]}>Circulating Supply</span>
           <span className={styles["coin-info__numbers"]}>
-            {singleCoinStore.coin?.market_data.circulating_supply}
+            {singleCoinStore.coin.market_data.circulating_supply}
           </span>
         </li>
         <li className={styles["coin-info__item"]}>
           <span className={styles["coin-info__label"]}>Total Supply</span>
           <span className={styles["coin-info__numbers"]}>
-            {singleCoinStore.coin?.market_data.total_supply}
+            {singleCoinStore.coin.market_data.total_supply}
           </span>
         </li>
         <li className={styles["coin-info__item"]}>
           <span className={styles["coin-info__label"]}>Max Supply</span>
           <span className={styles["coin-info__numbers"]}>
-            {singleCoinStore.coin?.market_data.max_supply}
+            {singleCoinStore.coin.market_data.max_supply}
           </span>
         </li>
       </ul>
@@ -111,7 +112,7 @@ function CoinPage() {
 
       <div
         dangerouslySetInnerHTML={{
-          __html: singleCoinStore.coin?.description.en!,
+          __html: singleCoinStore.coin.description.en!,
         }}
         className={styles["description-text"]}
       />

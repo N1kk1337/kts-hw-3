@@ -1,3 +1,5 @@
+import { useCallback } from "react";
+
 import classNames from "classnames";
 
 import styles from "./Input.module.scss";
@@ -21,9 +23,12 @@ export const Input: React.FC<InputProps> = ({ onChange, value, ...props }) => {
       )}
       type="text"
       value={value}
-      onChange={(e) => {
-        onChange(e.target.value);
-      }}
+      onChange={useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+          onChange(e.target.value);
+        },
+        [onChange],
+      )}
     />
   );
 };

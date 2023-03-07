@@ -15,7 +15,7 @@ export type CardProps = {
   priceChange: string;
 };
 
-export const Card: React.FC<CardProps> = ({
+export const SingleCoinCard: React.FC<CardProps> = ({
   image,
   title,
   subtitle,
@@ -43,4 +43,4 @@ export const Card: React.FC<CardProps> = ({
   );
 };
 
-export default Card;
+export default SingleCoinCard;

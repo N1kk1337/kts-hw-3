@@ -77,7 +77,7 @@ function CoinListPage() {
   // пока у нас нет обработчика ошибок пусть будет так
   return coinListStore.meta !== Meta.success &&
     coinCategoryListStore.meta !== Meta.success ? (
-    <Loader size={LoaderSize.l}></Loader>
+    <Loader size={LoaderSize.l} />
   ) : (
     <div className={styles["coin-list-page"]}>
       <div className={styles["coin-list__search"]}>
@@ -85,7 +85,7 @@ function CoinListPage() {
           placeholder="Search Cryptocurrency"
           value={searchInputValue}
           onChange={handleInputChange}
-        ></Input>
+        />
         <Button onClick={handleSearch} className={styles["search-btn"]}>
           &#x1F50D;
         </Button>
@@ -101,7 +101,7 @@ function CoinListPage() {
           }
         />
       </div>
-      <div className={styles["coin-list__tabs"]}></div>
+      <div className={styles["coin-list__tabs"]} />
       <div>
         {coinListStore.list && (
           <InfiniteScroll
@@ -109,7 +109,7 @@ function CoinListPage() {
             dataLength={coinListStore.list.length}
             next={() => coinListStore.getNextPage(searchInputValue)}
             hasMore={true}
-            loader={<Loader></Loader>}
+            loader={<Loader />}
             height="700px"
             endMessage={
               <p style={{ textAlign: "center" }}>
@@ -128,7 +128,7 @@ function CoinListPage() {
                     subtitle={coin.symbol.toUpperCase()}
                     price={`${currency} ${coin.current_price}`}
                     priceChange={coin.price_change_percentage_24h}
-                  ></Card>
+                  />
                 );
               })}
           </InfiniteScroll>

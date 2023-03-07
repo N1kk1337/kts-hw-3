@@ -1,9 +1,10 @@
 @use "../../../styles/mixins.scss" as *;
 .coin-page {
+  @include container;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 375px;
+  background-color: #fff;
 }
 .coin-info__item {
   display: flex;
