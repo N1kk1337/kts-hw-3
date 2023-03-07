@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import classNames from "classnames";
 
@@ -26,6 +26,7 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
   pluralizeOptions,
 }) => {
   const [open, setOpen] = useState(false);
+  const isMounted = useRef(false);
 
   const updatedValues = (key: string): Option[] => {
     const option = options.find((option) => option.key === key);
@@ -40,10 +41,21 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
     return value;
   };
 
+  useEffect(() => {
+    if (isMounted.current && open === false) {
+    } else {
+      isMounted.current = true;
+    }
+  }, [open]);
+
   return (
     <div className={styles["multi-dropdown"]}>
       <button disabled={disabled} onClick={() => setOpen(!open)}>
-        {pluralizeOptions(value) || ""}
+        {open ? (
+          <span>Press here to filter</span>
+        ) : (
+          pluralizeOptions(value) || ""
+        )}
       </button>
       {open && !disabled && (
         <div className={styles["scroll-container"]}>
