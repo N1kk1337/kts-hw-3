@@ -74,7 +74,7 @@ function CoinPage() {
         <li className={styles["coin-info__item"]}>
           <span className={styles["coin-info__label"]}>Market Cap</span>
           <span className={styles["coin-info__numbers"]}>
-            {singleCoinStore.coin.market_data.market_cap[currency!]}
+            {singleCoinStore.coin.market_data.market_cap[currency!] || "∞"}
           </span>
         </li>
         <li className={styles["coin-info__item"]}>
@@ -92,19 +92,19 @@ function CoinPage() {
         <li className={styles["coin-info__item"]}>
           <span className={styles["coin-info__label"]}>Circulating Supply</span>
           <span className={styles["coin-info__numbers"]}>
-            {singleCoinStore.coin.market_data.circulating_supply}
+            {singleCoinStore.coin.market_data.circulating_supply || "∞"}
           </span>
         </li>
         <li className={styles["coin-info__item"]}>
           <span className={styles["coin-info__label"]}>Total Supply</span>
           <span className={styles["coin-info__numbers"]}>
-            {singleCoinStore.coin.market_data.total_supply}
+            {singleCoinStore.coin.market_data.total_supply || "∞"}
           </span>
         </li>
         <li className={styles["coin-info__item"]}>
           <span className={styles["coin-info__label"]}>Max Supply</span>
           <span className={styles["coin-info__numbers"]}>
-            {singleCoinStore.coin.market_data.max_supply}
+            {singleCoinStore.coin.market_data.max_supply || "∞"}
           </span>
         </li>
       </ul>
