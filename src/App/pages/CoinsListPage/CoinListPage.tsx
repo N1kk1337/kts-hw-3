@@ -9,6 +9,7 @@ import MultiDropdown from "@components/MultiDropdown";
 import { Option } from "@components/MultiDropdown/MultiDropdown";
 import CoinCategoryListStore from "@stores/CoinCategoryListStore";
 import CoinListStore from "@stores/CoinListStore";
+import rootStore from "@stores/RootStore/instance";
 import { CurrencyCode } from "@utils/currency";
 import { Meta } from "@utils/meta";
 import { observer, useLocalStore } from "mobx-react-lite";
@@ -62,8 +63,9 @@ function CoinListPage() {
   };
 
   const handleCoinClick = (id: string) => {
+    rootStore;
     navigate(
-      `/coins/${id}&currency=${
+      `/coins/${id}?currency=${
         searchInputValue.trim() === "" ? "usd" : searchInputValue
       }`,
     );
@@ -74,11 +76,21 @@ function CoinListPage() {
     coinListStore.getCoinListData(searchInputValue);
   }, []);
 
-  // пока у нас нет обработчика ошибок пусть будет так
-  return coinListStore.meta !== Meta.success &&
-    coinCategoryListStore.meta !== Meta.success ? (
-    <Loader size={LoaderSize.l} />
-  ) : (
+  if (
+    coinListStore.meta === Meta.loading ||
+    coinCategoryListStore.meta === Meta.loading
+  ) {
+    return <Loader size={LoaderSize.l} />;
+  }
+
+  if (
+    coinListStore.meta === Meta.error ||
+    coinCategoryListStore.meta === Meta.error
+  ) {
+    return <p>API overloaded, please wait a minute and refresh the page</p>;
+  }
+
+  return (
     <div className={styles["coin-list-page"]}>
       <div className={styles["coin-list__search"]}>
         <Input
