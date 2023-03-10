@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import classNames from "classnames";
-
+import DropdownItem from "./DropdownItem";
 import styles from "./MultiDropdown.module.scss";
 
 /** Вариант для выбора в фильтре */
@@ -12,10 +11,11 @@ export type Option = {
 
 export type MultiDropdownProps = {
   options: Option[];
-  value: Option[];
-  onChange: (value: Option[]) => void;
+  value: string[];
+  onClose: () => void;
+  onChange: (value: string[]) => void;
   disabled?: boolean;
-  pluralizeOptions: (value: Option[]) => string;
+  pluralizeOptions: (value: string[]) => string;
 };
 
 export const MultiDropdown: React.FC<MultiDropdownProps> = ({
@@ -24,25 +24,15 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
   onChange,
   disabled,
   pluralizeOptions,
+  onClose,
 }) => {
   const [open, setOpen] = useState(false);
   const isMounted = useRef(false);
-
-  const updatedValues = (key: string): Option[] => {
-    const option = options.find((option) => option.key === key);
-    if (option) {
-      const index = value.findIndex((val) => val.key === option.key);
-      if (index >= 0) {
-        return value.filter((val) => val.key !== option.key);
-      } else {
-        return [...value, option];
-      }
-    }
-    return value;
-  };
+  console.log("dropdown rerender");
 
   useEffect(() => {
     if (isMounted.current && open === false) {
+      onClose();
     } else {
       isMounted.current = true;
     }
@@ -61,25 +51,12 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
         <div className={styles["scroll-container"]}>
           <div className={styles["options-container"]}>
             {options.map((option) => (
-              <div
-                className={classNames(
-                  styles.option,
-                  value.some((o) => o.key === option.key) && styles.selected,
-                )}
+              <DropdownItem
+                value={value}
                 key={option.key}
-              >
-                <label>
-                  {option.value}
-                  <input
-                    id={option.key}
-                    data-key={option.key}
-                    type="checkbox"
-                    onChange={() => {
-                      onChange(updatedValues(option.key));
-                    }}
-                  />
-                </label>
-              </div>
+                option={option}
+                onChange={onChange}
+              />
             ))}
           </div>
         </div>

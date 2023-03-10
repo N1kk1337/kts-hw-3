@@ -45,10 +45,6 @@ function CoinPage() {
     setCurrency(CurrencyCode[currencyCode as keyof typeof CurrencyCode]);
   }, [coinId, currency, singleCoinStore]);
 
-  // const coinName = rootStore.query.getParam("");
-  // const currencyCode = rootStore.query.getParam("currency");
-  // setCurrency(CurrencyCode[currencyCode as keyof typeof CurrencyCode]);
-
   const navigate = useNavigate();
 
   const handleBackClick = useCallback(() => {

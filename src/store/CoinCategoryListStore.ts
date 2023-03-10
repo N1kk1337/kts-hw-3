@@ -1,4 +1,3 @@
-import { Option } from "@components/MultiDropdown/MultiDropdown";
 import { API_CATEGORIES } from "@config/api";
 import { Meta } from "@utils/meta";
 import axios from "axios";
@@ -9,6 +8,7 @@ import {
   observable,
   runInAction,
 } from "mobx";
+import { Option } from "src/App/pages/CoinsListPage/components/MultiDropdown/MultiDropdown";
 
 import { ILocalStore } from "./useLocalStore";
 

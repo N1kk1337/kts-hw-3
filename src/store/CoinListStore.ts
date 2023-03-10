@@ -54,31 +54,56 @@ class CoinListStore implements ILocalStore {
     return this._currency;
   }
 
-  getNextPage(search: string) {
+  getNextPage(search: string, categories: string[]) {
     this._page++;
-    this.getCoinListData(search);
+    this.getCoinListData(search, categories);
   }
 
-  async getCoinListData(search: string, categories?: string[]) {
+  resetList() {
+    runInAction(() => {
+      this._page = 1;
+      this._list = [];
+    });
+  }
+
+  async getCoinListData(search: string, categories: string[]) {
     if (search.trim() === "") search = "usd";
     this._meta = Meta.loading;
-    const response = await axios.get<CoinData[]>(
-      `${BASE_URL}/coins/markets/?vs_currency=${search}&per_page=50&page=${this._page}
-      `,
-    );
-    runInAction(() => {
-      if (response.status === 200) {
-        if (this._page === 1) {
-          this._list = response.data;
-          this._meta = Meta.success;
-        } else {
-          this._list = [...this._list!, ...response.data];
-          this._meta = Meta.success;
+
+    if (categories.length !== 0) {
+      this.resetList();
+      categories.forEach(async (cat) => {
+        runInAction(async () => {
+          const response = await axios.get<CoinData[]>(
+            `${BASE_URL}/coins/markets/?vs_currency=${search}&category=${cat}&per_page=50&page=${this._page}
+          `,
+          );
+          if (response.status === 200) {
+            this._list = [...this._list!, ...response.data];
+          }
+        });
+      });
+
+      this._meta = Meta.success;
+    } else {
+      const response = await axios.get<CoinData[]>(
+        `${BASE_URL}/coins/markets/?vs_currency=${search}&per_page=50&page=${this._page}
+        `,
+      );
+      runInAction(() => {
+        if (response.status === 200) {
+          if (this._page === 1) {
+            this._list = response.data;
+            this._meta = Meta.success;
+          } else {
+            this._list = [...this._list!, ...response.data];
+            this._meta = Meta.success;
+          }
+          return;
         }
-        return;
-      }
-      this._meta = Meta.error;
-    });
+        this._meta = Meta.error;
+      });
+    }
   }
   destroy(): void {
     this._list = [];
@@ -90,6 +115,7 @@ class CoinListStore implements ILocalStore {
       if (currency) this._currency = currency as string;
       else this._currency = "usd";
     },
+    { delay: 1000 },
   );
 }
 

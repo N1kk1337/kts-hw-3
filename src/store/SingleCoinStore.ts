@@ -4,10 +4,8 @@ import axios from "axios";
 import {
   action,
   computed,
-  IReactionDisposer,
   makeObservable,
   observable,
-  reaction,
   runInAction,
 } from "mobx";
 import { SingleCoinData } from "src/App/pages/CoinPage/CoinPage";

@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import Button from "@components/Button";
 import Card from "@components/Card";
 import Input from "@components/Input";
 import Loader from "@components/Loader";
 import { LoaderSize } from "@components/Loader/Loader";
-import MultiDropdown from "@components/MultiDropdown";
-import { Option } from "@components/MultiDropdown/MultiDropdown";
 import CoinCategoryListStore from "@stores/CoinCategoryListStore";
 import CoinListStore from "@stores/CoinListStore";
 import rootStore from "@stores/RootStore/instance";
@@ -17,6 +15,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import styles from "./CoinListPage.module.scss";
+import MultiDropdown from "./components/MultiDropdown/MultiDropdown";
 
 export interface CoinData {
   id: string;
@@ -53,30 +52,41 @@ function CoinListPage() {
       coinListStore.currency.toUpperCase() as keyof typeof CurrencyCode
     ],
   );
-  const [chosenCategories, setChosenCategories] = useState<Option[]>([]);
+  const [chosenCategories, setChosenCategories] = useState<string[]>([]);
   const navigate = useNavigate();
 
-  const handleInputChange = (value: string): void => {
-    setSearchInputValue(value);
-    setSearchParams(`?vs_currency=${value}`);
-  };
+  const handleInputChange = useCallback(
+    (value: string): void => {
+      setSearchInputValue(value);
+      setSearchParams(`?vs_currency=${value}`);
+    },
+    [setSearchParams],
+  );
 
-  const handleSearch = () => {
+  const handleSearch = useCallback(() => {
+    console.log("search");
     if (searchInputValue.toUpperCase() in CurrencyCode) {
+      console.log("search 2");
+
       rootStore.query.setSearch(searchInputValue);
       setCurrency(
         CurrencyCode[
           searchInputValue.toUpperCase() as keyof typeof CurrencyCode
         ],
       );
-      coinListStore.getCoinListData(searchInputValue);
+      coinListStore.resetList();
+      coinListStore.getCoinListData(searchInputValue, chosenCategories);
     } else {
       setCurrency(CurrencyCode.USD);
       rootStore.query.setSearch("usd");
-      coinListStore.getCoinListData("usd");
+      coinListStore.resetList();
+      coinListStore.getCoinListData("usd", chosenCategories);
       setSearchParams(`?vs_currency=usd`);
+      setSearchInputValue("");
+      // todo придумать какой-то более красивый способ сказать, что такой валюты нет.
+      alert("There is no such currency, try USD, BTC, or EUR");
     }
-  };
+  }, [chosenCategories, coinListStore, searchInputValue, setSearchParams]);
 
   const handleCoinClick = (id: string) => {
     navigate(
@@ -86,9 +96,15 @@ function CoinListPage() {
     );
   };
 
+  const handleDropdownClose = useCallback(() => {
+    if (chosenCategories.length !== 0) {
+      coinListStore.getCoinListData(searchInputValue, chosenCategories);
+    }
+  }, [chosenCategories, coinListStore, searchInputValue]);
+
   useEffect(() => {
     coinCategoryListStore.getCoinCategoryListData();
-    coinListStore.getCoinListData(coinListStore.currency);
+    coinListStore.getCoinListData(coinListStore.currency, chosenCategories);
   }, []);
 
   if (coinCategoryListStore.meta === Meta.loading) {
@@ -119,9 +135,12 @@ function CoinListPage() {
         <MultiDropdown
           options={coinCategoryListStore.list!}
           value={chosenCategories}
+          onClose={handleDropdownClose}
           onChange={setChosenCategories}
-          pluralizeOptions={(values: Option[]) =>
-            values.length === 0 ? "Choose coins" : `Chosen: ${values.length}`
+          pluralizeOptions={(values: string[]) =>
+            values.length === 0
+              ? "Choose coins"
+              : `Chosen: ${values.join(", ")}`
           }
         />
       </div>
@@ -131,9 +150,11 @@ function CoinListPage() {
           <InfiniteScroll
             className={styles["coin-list__list"]}
             dataLength={coinListStore.list.length}
-            next={() => coinListStore.getNextPage(searchInputValue)}
+            next={() =>
+              coinListStore.getNextPage(searchInputValue, chosenCategories)
+            }
             hasMore={true}
-            loader={<Loader />}
+            loader={<Loader className={styles.loader} />}
             height="700px"
             endMessage={
               <p style={{ textAlign: "center" }}>
