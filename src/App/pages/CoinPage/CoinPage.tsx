@@ -54,6 +54,9 @@ function CoinPage() {
   if (singleCoinStore.meta === Meta.loading) {
     return <Loader size={LoaderSize.l} />;
   }
+  if (singleCoinStore.meta === Meta.error) {
+    return <p>API overloaded, please wait a minute and refresh the page</p>;
+  }
   if (!singleCoinStore.coin) {
     return <p>There is no such coin</p>;
   }

@@ -71,16 +71,18 @@ class CoinListStore implements ILocalStore {
     this._meta = Meta.loading;
 
     if (categories.length !== 0) {
-      this.resetList();
-      categories.forEach(async (cat) => {
-        runInAction(async () => {
+      // Если я правильно понимаю, апи может отдавать только монеты 1 категории за раз, так что придётся делать кучу вызовов.
+      runInAction(() => {
+        categories.forEach(async (cat) => {
           const response = await axios.get<CoinData[]>(
             `${BASE_URL}/coins/markets/?vs_currency=${search}&category=${cat}&per_page=50&page=${this._page}
           `,
           );
-          if (response.status === 200) {
-            this._list = [...this._list!, ...response.data];
-          }
+          runInAction(() => {
+            if (response.status === 200) {
+              this._list = [...this._list!, ...response.data];
+            }
+          });
         });
       });
 

@@ -64,10 +64,7 @@ function CoinListPage() {
   );
 
   const handleSearch = useCallback(() => {
-    console.log("search");
     if (searchInputValue.toUpperCase() in CurrencyCode) {
-      console.log("search 2");
-
       rootStore.query.setSearch(searchInputValue);
       setCurrency(
         CurrencyCode[
@@ -98,6 +95,7 @@ function CoinListPage() {
 
   const handleDropdownClose = useCallback(() => {
     if (chosenCategories.length !== 0) {
+      coinListStore.resetList();
       coinListStore.getCoinListData(searchInputValue, chosenCategories);
     }
   }, [chosenCategories, coinListStore, searchInputValue]);

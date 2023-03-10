@@ -28,7 +28,6 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
 }) => {
   const [open, setOpen] = useState(false);
   const isMounted = useRef(false);
-  console.log("dropdown rerender");
 
   useEffect(() => {
     if (isMounted.current && open === false) {
