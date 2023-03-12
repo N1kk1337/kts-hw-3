@@ -1,0 +1,62 @@
+@use "@styles/mixins.scss" as *;
+
+.loader {
+  align-self: center;
+  justify-self: center;
+}
+
+.coin-list-page {
+  @include container;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 10px;
+  background-color: #f8f9fa;
+  overflow: hidden;
+}
+
+.coin-list__search,
+.coin-list__categories,
+.coin-list__tabs {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.coin-list__search {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.search-btn {
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  border-radius: 6px;
+  width: 40px;
+  height: 40px;
+  font-size: 22px;
+}
+.coin-list__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 10px;
+
+  &::-webkit-scrollbar {
+    width: 1em;
+  }
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border: 4px solid rgba(0, 0, 0, 0);
+    border-radius: 12px;
+    border-radius: 9999px;
+    background-clip: padding-box;
+    background-color: darkgrey;
+  }
+}

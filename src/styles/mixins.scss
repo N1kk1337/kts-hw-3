@@ -1,0 +1,9 @@
+$background: #dfe2e4;
+$contrast: #212529;
+$good-text: #21bf73;
+$subtext: #6c757d;
+
+@mixin container {
+  padding: 16px;
+  max-width: 375px;
+}
