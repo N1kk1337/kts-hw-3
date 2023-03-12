@@ -1,0 +1,118 @@
+@use "../../../styles/mixins.scss" as *;
+.coin-page {
+  @include container;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: #fff;
+}
+
+.coin__back-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 16px;
+  border: 0;
+  background: rgba(0, 0, 0, 0);
+}
+
+.coin-info__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $background;
+  height: 40px;
+}
+
+.coin-price-container {
+  display: flex;
+  gap: 12px;
+}
+
+.coin-price {
+  display: flex;
+  align-items: center;
+  color: $contrast;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 30px;
+  font-family: "Circular Std";
+}
+
+.coin-price-change {
+  display: flex;
+  align-items: center;
+  color: $good-text;
+  font-style: normal;
+  font-weight: 450;
+  font-size: 16px;
+  line-height: 20px;
+  font-family: "Circular Std";
+}
+.coin-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.coin__img {
+  width: 24px;
+  height: 24px;
+}
+
+.coin__title {
+  margin-left: 4px;
+  color: $contrast;
+  font-style: normal;
+  font-weight: 450;
+  font-size: 16px;
+  line-height: 20px;
+  font-family: "Circular Std";
+}
+
+.coin__subtitle {
+  color: $subtext;
+  font-style: normal;
+  font-weight: 450;
+  font-size: 10px;
+  line-height: 13px;
+  font-family: "Circular Std";
+}
+
+.coin-info__label {
+  color: $subtext;
+  font-style: normal;
+  font-weight: 450;
+  font-size: 14px;
+  line-height: 18px;
+  font-family: "Circular Std";
+}
+
+.coin-info__numbers {
+  color: $contrast;
+  font-style: normal;
+  font-weight: 450;
+  font-size: 14px;
+  line-height: 18px;
+  font-family: "Circular Std";
+}
+
+.description-header {
+  color: $subtext;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  font-family: "Circular Std";
+}
+
+.description-text {
+  color: $contrast;
+  font-style: normal;
+  font-weight: 450;
+  font-size: 14px;
+  line-height: 18px;
+  font-family: "Circular Std";
+}
