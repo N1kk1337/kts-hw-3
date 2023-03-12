@@ -1,6 +1,8 @@
-import Loader from "@components/Loader";
-import { LoaderSize } from "@components/Loader";
+import React from "react";
+
 import classNames from "classnames";
+import Loader from "components/Loader";
+import { LoaderSize } from "components/Loader";
 
 import styles from "./Button.module.scss";
 

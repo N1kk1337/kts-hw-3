@@ -1,6 +1,6 @@
-import { BASE_URL } from "@config/api";
-import { Meta } from "@utils/meta";
 import axios from "axios";
+import { BASE_URL } from "config/api";
+import { SingleCoinData } from "config/types";
 import {
   action,
   computed,
@@ -8,7 +8,7 @@ import {
   observable,
   runInAction,
 } from "mobx";
-import { SingleCoinData } from "src/App/pages/CoinPage/CoinPage";
+import { Meta } from "utils/meta";
 
 import rootStore from "./RootStore/instance";
 import { ILocalStore } from "./useLocalStore";
@@ -18,7 +18,22 @@ type PrivateFields = "_coin" | "_meta" | "_currency";
 class SingleCoinStore implements ILocalStore {
   private _currency: string = "usd";
   private _meta: Meta = Meta.initial;
-  private _coin: SingleCoinData | undefined;
+  private _coin: SingleCoinData = {
+    id: "",
+    symbol: "",
+    name: "",
+    image: {},
+    description: {},
+    market_data: {
+      current_price: {},
+      market_cap: {},
+      price_change_percentage_24h: "",
+      fully_diluted_valuation: {},
+      circulating_supply: "",
+      total_supply: "",
+      max_supply: "",
+    },
+  };
 
   constructor() {
     makeObservable<SingleCoinStore, PrivateFields>(this, {
@@ -47,7 +62,22 @@ class SingleCoinStore implements ILocalStore {
   async getSingleCoinData(coinName: string) {
     this._currency = rootStore.query.getParam("vs_currency") as string;
     this._meta = Meta.loading;
-    this._coin = undefined;
+    this._coin = {
+      id: "",
+      symbol: "",
+      name: "",
+      image: {},
+      description: {},
+      market_data: {
+        current_price: {},
+        market_cap: {},
+        price_change_percentage_24h: "",
+        fully_diluted_valuation: {},
+        circulating_supply: "",
+        total_supply: "",
+        max_supply: "",
+      },
+    };
     const response = await axios.get<SingleCoinData>(
       `${BASE_URL}coins/${coinName}`,
     );

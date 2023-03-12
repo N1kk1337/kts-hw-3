@@ -1,38 +1,22 @@
 import { useCallback, useEffect, useState } from "react";
+import React from "react";
 
-import Button from "@components/Button";
-import Card from "@components/Card";
-import Input from "@components/Input";
-import Loader from "@components/Loader";
-import { LoaderSize } from "@components/Loader/Loader";
-import CoinCategoryListStore from "@stores/CoinCategoryListStore";
-import CoinListStore from "@stores/CoinListStore";
-import rootStore from "@stores/RootStore/instance";
-import { CurrencyCode } from "@utils/currency";
-import { Meta } from "@utils/meta";
+import Button from "components/Button";
+import Card from "components/Card";
+import Input from "components/Input";
+import Loader from "components/Loader";
+import { LoaderSize } from "components/Loader/Loader";
 import { observer, useLocalStore } from "mobx-react-lite";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import CoinCategoryListStore from "stores/CoinCategoryListStore";
+import CoinListStore from "stores/CoinListStore";
+import rootStore from "stores/RootStore/instance";
+import { CurrencyCode } from "utils/currency";
+import { Meta } from "utils/meta";
 
 import styles from "./CoinListPage.module.scss";
 import MultiDropdown from "./components/MultiDropdown/MultiDropdown";
-
-export interface CoinData {
-  id: string;
-  symbol: string;
-  name: string;
-  image: string;
-  current_price: string;
-  price_change_percentage_24h: string;
-  market_cap: {};
-  fully_diluted_valuation: {};
-  circulating_supply: string;
-  total_supply: string;
-  max_supply: string;
-  description: {
-    [key: string]: string;
-  };
-}
 
 function CoinListPage() {
   const coinListStore = useLocalStore(() => new CoinListStore());

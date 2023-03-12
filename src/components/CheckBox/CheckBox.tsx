@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./CheckBox.module.scss";
 
 /** Пропсы, которые принимает компонент CheckBox */

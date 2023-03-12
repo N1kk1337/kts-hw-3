@@ -1,6 +1,6 @@
-import { BASE_URL } from "@config/api";
-import { Meta } from "@utils/meta";
 import axios from "axios";
+import { BASE_URL } from "config/api";
+import { CoinData } from "config/types";
 import {
   action,
   computed,
@@ -10,7 +10,7 @@ import {
   reaction,
   runInAction,
 } from "mobx";
-import { CoinData } from "src/App/pages/CoinsListPage/CoinListPage";
+import { Meta } from "utils/meta";
 
 import rootStore from "./RootStore/instance";
 import { ILocalStore } from "./useLocalStore";
@@ -72,39 +72,49 @@ class CoinListStore implements ILocalStore {
 
     if (categories.length !== 0) {
       // Если я правильно понимаю, апи может отдавать только монеты 1 категории за раз, так что придётся делать кучу вызовов.
-      runInAction(() => {
-        categories.forEach(async (cat) => {
-          const response = await axios.get<CoinData[]>(
-            `${BASE_URL}/coins/markets/?vs_currency=${search}&category=${cat}&per_page=50&page=${this._page}
+      try {
+        runInAction(() => {
+          categories.forEach(async (cat) => {
+            const response = await axios.get<CoinData[]>(
+              `${BASE_URL}/coins/markets/?vs_currency=${search}&category=${cat}&per_page=50&page=${this._page}
           `,
-          );
-          runInAction(() => {
-            if (response.status === 200) {
-              this._list = [...this._list!, ...response.data];
-            }
+            );
+            runInAction(() => {
+              if (response.status === 200) {
+                this._list = [...this._list!, ...response.data];
+              }
+            });
           });
         });
-      });
 
-      this._meta = Meta.success;
-    } else {
-      const response = await axios.get<CoinData[]>(
-        `${BASE_URL}/coins/markets/?vs_currency=${search}&per_page=50&page=${this._page}
-        `,
-      );
-      runInAction(() => {
-        if (response.status === 200) {
-          if (this._page === 1) {
-            this._list = response.data;
-            this._meta = Meta.success;
-          } else {
-            this._list = [...this._list!, ...response.data];
-            this._meta = Meta.success;
-          }
-          return;
-        }
+        this._meta = Meta.success;
+      } catch (e) {
         this._meta = Meta.error;
-      });
+        alert("API is overloaded, try again in a few minutes.");
+      }
+    } else {
+      try {
+        const response = await axios.get<CoinData[]>(
+          `${BASE_URL}/coins/markets/?vs_currency=${search}&per_page=50&page=${this._page}
+        `,
+        );
+        runInAction(() => {
+          if (response.status === 200) {
+            if (this._page === 1) {
+              this._list = response.data;
+              this._meta = Meta.success;
+            } else {
+              this._list = [...this._list!, ...response.data];
+              this._meta = Meta.success;
+            }
+            return;
+          }
+        });
+      } catch (e) {
+        this._meta = Meta.error;
+
+        alert("API is overloaded, try again in a few minutes.");
+      }
     }
   }
   destroy(): void {

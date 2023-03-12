@@ -1,6 +1,8 @@
-import { COIN_PAGE, MAIN_PAGE } from "@config/routes";
-import { useQueryParamsStoreInit } from "@stores/RootStore/hooks/useQueryParamsStoreInit";
+import React from "react";
+
+import { COIN_PAGE, MAIN_PAGE } from "config/routes";
 import { Route, Routes } from "react-router-dom";
+import { useQueryParamsStoreInit } from "stores/RootStore/hooks/useQueryParamsStoreInit";
 
 import CoinPage from "./pages/CoinPage";
 import CoinListPage from "./pages/CoinsListPage";

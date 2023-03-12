@@ -1,8 +1,8 @@
 import React from "react";
 
 import classNames from "classnames";
+import { Option } from "config/types";
 
-import { Option } from "./MultiDropdown";
 import styles from "./MultiDropdown.module.scss";
 
 type DropdownItemProp = {

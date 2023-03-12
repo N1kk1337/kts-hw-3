@@ -1,37 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
+import React from "react";
 
-import Loader from "@components/Loader";
-import { LoaderSize } from "@components/Loader/Loader";
-import backArrow from "@images/back_arrow.svg";
-import rootStore from "@stores/RootStore/instance";
-import SingleCoinStore from "@stores/SingleCoinStore";
-import { useLocalStore } from "@stores/useLocalStore";
-import { CurrencyCode } from "@utils/currency";
-import { Meta } from "@utils/meta";
+import Loader from "components/Loader";
+import { LoaderSize } from "components/Loader/Loader";
+import backArrow from "images/back_arrow.svg";
 import { observer } from "mobx-react-lite";
 import { useNavigate, useParams } from "react-router-dom";
+import SingleCoinStore from "stores/SingleCoinStore";
+import { useLocalStore } from "stores/useLocalStore";
+import { CurrencyCode } from "utils/currency";
+import { Meta } from "utils/meta";
 
 import styles from "./CoinPage.module.scss";
-
-export interface SingleCoinData {
-  id: string;
-  symbol: string;
-  name: string;
-  image: { [key: string]: string };
-  market_data: {
-    current_price: { [key: string]: string };
-    market_cap: { [key: string]: string };
-    price_change_percentage_24h: string;
-    fully_diluted_valuation: { [key: string]: string };
-    circulating_supply: string;
-    total_supply: string;
-    max_supply: string;
-  };
-
-  description: {
-    [key: string]: string;
-  };
-}
 
 function CoinPage() {
   const { coinId } = useParams();

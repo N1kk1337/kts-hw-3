@@ -1,13 +1,12 @@
+import React from "react";
 import { useEffect, useRef, useState } from "react";
+
+import { Option } from "config/types";
 
 import DropdownItem from "./DropdownItem";
 import styles from "./MultiDropdown.module.scss";
 
 /** Вариант для выбора в фильтре */
-export type Option = {
-  key: string;
-  value: string;
-};
 
 export type MultiDropdownProps = {
   options: Option[];
