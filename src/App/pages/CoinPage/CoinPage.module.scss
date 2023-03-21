@@ -1,118 +1,107 @@
-@use "../../../styles/mixins.scss" as *;
+@use "~styles/mixins.scss" as *;
 .coin-page {
   @include container;
   display: flex;
   flex-direction: column;
   gap: 16px;
   background-color: #fff;
-}
-
-.coin__back-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  margin-right: 16px;
-  border: 0;
-  background: rgba(0, 0, 0, 0);
-}
-
-.coin-info__item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid $background;
-  height: 40px;
-}
-
-.coin-price-container {
-  display: flex;
-  gap: 12px;
-}
-
-.coin-price {
-  display: flex;
-  align-items: center;
-  color: $contrast;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 30px;
-  font-family: "Circular Std";
-}
-
-.coin-price-change {
-  display: flex;
-  align-items: center;
-  color: $good-text;
-  font-style: normal;
   font-weight: 450;
-  font-size: 16px;
-  line-height: 20px;
   font-family: "Circular Std";
-}
-.coin-header {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
 
-.coin__img {
-  width: 24px;
-  height: 24px;
-}
+  &__back-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 16px;
+    border: 0;
+    background: rgba(0, 0, 0, 0);
+  }
 
-.coin__title {
-  margin-left: 4px;
-  color: $contrast;
-  font-style: normal;
-  font-weight: 450;
-  font-size: 16px;
-  line-height: 20px;
-  font-family: "Circular Std";
-}
+  &__info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid $background;
+    height: 40px;
+  }
 
-.coin__subtitle {
-  color: $subtext;
-  font-style: normal;
-  font-weight: 450;
-  font-size: 10px;
-  line-height: 13px;
-  font-family: "Circular Std";
-}
+  &__price-container {
+    display: flex;
+    gap: 12px;
+  }
 
-.coin-info__label {
-  color: $subtext;
-  font-style: normal;
-  font-weight: 450;
-  font-size: 14px;
-  line-height: 18px;
-  font-family: "Circular Std";
-}
+  &__price {
+    display: flex;
+    align-items: center;
+    color: $contrast;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 30px;
+  }
 
-.coin-info__numbers {
-  color: $contrast;
-  font-style: normal;
-  font-weight: 450;
-  font-size: 14px;
-  line-height: 18px;
-  font-family: "Circular Std";
-}
+  &__price-change {
+    display: flex;
+    align-items: center;
+    color: $good-text;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 20px;
+  }
 
-.description-header {
-  color: $subtext;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 20px;
-  font-family: "Circular Std";
-}
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
 
-.description-text {
-  color: $contrast;
-  font-style: normal;
-  font-weight: 450;
-  font-size: 14px;
-  line-height: 18px;
-  font-family: "Circular Std";
+  &__img {
+    width: 24px;
+    height: 24px;
+  }
+
+  &__title {
+    margin-left: 4px;
+    color: $contrast;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  &__subtitle {
+    color: $subtext;
+    font-style: normal;
+    font-size: 10px;
+    line-height: 13px;
+  }
+
+  &__info-label {
+    color: $subtext;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  &__info-numbers {
+    color: $contrast;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  &__description-header {
+    color: $subtext;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  &__description-text {
+    color: $contrast;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 18px;
+  }
 }

@@ -1,6 +1,5 @@
 import axios from "axios";
 import { BASE_URL } from "config/api";
-import { SingleCoinData } from "config/types";
 import {
   action,
   computed,
@@ -8,6 +7,7 @@ import {
   observable,
   runInAction,
 } from "mobx";
+import { SingleCoinData } from "models/types";
 import { Meta } from "utils/meta";
 
 import rootStore from "./RootStore/instance";

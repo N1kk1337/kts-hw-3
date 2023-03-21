@@ -1,6 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from "config/api";
-import { CoinData } from "config/types";
+import { CoinData } from "models/types";
 import {
   action,
   computed,

@@ -9,6 +9,7 @@ import { LoaderSize } from "components/Loader/Loader";
 import { observer, useLocalStore } from "mobx-react-lite";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import CoinCategoryListStore from "stores/CoinCategoryListStore";
 import CoinListStore from "stores/CoinListStore";
 import rootStore from "stores/RootStore/instance";
@@ -126,7 +127,40 @@ function CoinListPage() {
           }
         />
       </div>
-      <div className={styles["coin-list__tabs"]} />
+      <div className={styles["coin-list__tabs"]}>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? styles.active : styles.tabs__item
+          }
+          to={"/"}
+        >
+          All
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? styles.active : styles.tabs__item
+          }
+          to={"/gainer"}
+        >
+          Gainer
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? styles.active : styles.tabs__item
+          }
+          to={"/loser"}
+        >
+          Loser
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? styles.active : styles.tabs__item
+          }
+          to={"/favorites"}
+        >
+          Favorites
+        </NavLink>
+      </div>
       <div>
         {coinListStore.list && (
           <InfiniteScroll
@@ -137,7 +171,6 @@ function CoinListPage() {
             }
             hasMore={true}
             loader={<Loader className={styles.loader} />}
-            height="700px"
             endMessage={
               <p style={{ textAlign: "center" }}>
                 <b>Yay! You have seen it all</b>

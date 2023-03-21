@@ -1,14 +1,24 @@
+@use "~styles/mixins.scss" as *;
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-html,
-body,
-#root {
+
+html {
+  background-color: #f8f9fa;
+  font-family: "Circular Std";
+}
+
+.wrapper {
+  @include container;
   display: flex;
   flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0;
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
 
-import { Option } from "config/types";
+import { Option } from "models/types";
 
 import DropdownItem from "./DropdownItem";
 import styles from "./MultiDropdown.module.scss";

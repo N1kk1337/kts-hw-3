@@ -3,6 +3,7 @@ import React from "react";
 
 import Loader from "components/Loader";
 import { LoaderSize } from "components/Loader/Loader";
+import { MAIN_PAGE } from "config/routes";
 import backArrow from "images/back_arrow.svg";
 import { observer } from "mobx-react-lite";
 import { useNavigate, useParams } from "react-router-dom";
@@ -28,7 +29,7 @@ function CoinPage() {
   const navigate = useNavigate();
 
   const handleBackClick = useCallback(() => {
-    navigate("/");
+    navigate(MAIN_PAGE);
   }, []);
 
   if (singleCoinStore.meta === Meta.loading) {
@@ -43,22 +44,27 @@ function CoinPage() {
 
   return (
     <div className={styles["coin-page"]}>
-      <header className={styles["coin-header"]}>
-        <button onClick={handleBackClick} className={styles["coin__back-btn"]}>
+      <header className={styles["coin-page__header"]}>
+        <button
+          onClick={handleBackClick}
+          className={styles["coin-page__back-btn"]}
+        >
           <img src={backArrow} alt="back" />
         </button>
         <img
           alt=""
           src={singleCoinStore.coin?.image.small}
-          className={styles["coin__img"]}
+          className={styles["coin-page__img"]}
         />
-        <h1 className={styles["coin__title"]}>{singleCoinStore.coin.name}</h1>
-        <h2 className={styles.coin__subtitle}>
+        <h1 className={styles["coin-page__title"]}>
+          {singleCoinStore.coin.name}
+        </h1>
+        <h2 className={styles["coin-page__subtitle"]}>
           ({singleCoinStore.coin.symbol.toUpperCase()})
         </h2>
       </header>
-      <div className={styles["coin-price-container"]}>
-        <span className={styles["coin-price"]}>
+      <div className={styles["coin-page__price-container"]}>
+        <span className={styles["coin-page__price"]}>
           {
             CurrencyCode[
               singleCoinStore.currency.toUpperCase() as keyof typeof CurrencyCode
@@ -71,14 +77,14 @@ function CoinPage() {
             ]
           }
         </span>
-        <span className={styles["coin-price-change"]}>
+        <span className={styles["coin-page__price-change"]}>
           {singleCoinStore.coin.market_data.price_change_percentage_24h}
         </span>
       </div>
-      <ul className={styles["coin-info__container"]}>
-        <li className={styles["coin-info__item"]}>
-          <span className={styles["coin-info__label"]}>Market Cap</span>
-          <span className={styles["coin-info__numbers"]}>
+      <ul className={styles["coin-page__info"]}>
+        <li className={styles["coin-page__info-item"]}>
+          <span className={styles["coin-page__info-label"]}>Market Cap</span>
+          <span className={styles["coin-page__info-numbers"]}>
             {
               CurrencyCode[
                 singleCoinStore.currency.toUpperCase() as keyof typeof CurrencyCode
@@ -91,11 +97,11 @@ function CoinPage() {
             }
           </span>
         </li>
-        <li className={styles["coin-info__item"]}>
-          <span className={styles["coin-info__label"]}>
+        <li className={styles["coin-page__info-item"]}>
+          <span className={styles["coin-page__info-label"]}>
             Fully Diluted Valuation
           </span>
-          <span className={styles["coin-info__numbers"]}>
+          <span className={styles["coin-page__info-numbers"]}>
             {
               CurrencyCode[
                 singleCoinStore.currency.toUpperCase() as keyof typeof CurrencyCode
@@ -108,32 +114,34 @@ function CoinPage() {
             }
           </span>
         </li>
-        <li className={styles["coin-info__item"]}>
-          <span className={styles["coin-info__label"]}>Circulating Supply</span>
-          <span className={styles["coin-info__numbers"]}>
+        <li className={styles["coin-page__info-item"]}>
+          <span className={styles["coin-page__info-label"]}>
+            Circulating Supply
+          </span>
+          <span className={styles["coin-page__info-numbers"]}>
             {singleCoinStore.coin.market_data.circulating_supply || "∞"}
           </span>
         </li>
-        <li className={styles["coin-info__item"]}>
-          <span className={styles["coin-info__label"]}>Total Supply</span>
-          <span className={styles["coin-info__numbers"]}>
+        <li className={styles["coin-page__info-item"]}>
+          <span className={styles["coin-page__info-label"]}>Total Supply</span>
+          <span className={styles["coin-page__info-numbers"]}>
             {singleCoinStore.coin.market_data.total_supply || "∞"}
           </span>
         </li>
-        <li className={styles["coin-info__item"]}>
-          <span className={styles["coin-info__label"]}>Max Supply</span>
-          <span className={styles["coin-info__numbers"]}>
+        <li className={styles["coin-page__info-item"]}>
+          <span className={styles["coin-page__info-label"]}>Max Supply</span>
+          <span className={styles["coin-page__info-numbers"]}>
             {singleCoinStore.coin.market_data.max_supply || "∞"}
           </span>
         </li>
       </ul>
-      <h3 className={styles["description-header"]}>Description</h3>
+      <h3 className={styles["coin-page__description-header"]}>Description</h3>
 
       <div
         dangerouslySetInnerHTML={{
           __html: singleCoinStore.coin.description.en!,
         }}
-        className={styles["description-text"]}
+        className={styles["coin-page__description-text"]}
       />
     </div>
   );

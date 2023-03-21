@@ -1,6 +1,5 @@
 import axios from "axios";
 import { API_CATEGORIES } from "config/api";
-import { Option } from "config/types";
 import {
   action,
   computed,
@@ -8,6 +7,7 @@ import {
   observable,
   runInAction,
 } from "mobx";
+import { Option } from "models/types";
 import { Meta } from "utils/meta";
 
 import { ILocalStore } from "./useLocalStore";

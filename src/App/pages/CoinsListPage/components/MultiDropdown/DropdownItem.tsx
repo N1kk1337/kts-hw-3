@@ -1,7 +1,7 @@
 import React from "react";
 
 import classNames from "classnames";
-import { Option } from "config/types";
+import { Option } from "models/types";
 
 import styles from "./MultiDropdown.module.scss";
 

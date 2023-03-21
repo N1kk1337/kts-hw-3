@@ -1,4 +1,4 @@
-@use "../../../styles/mixins.scss" as *;
+@use "~styles/mixins.scss" as *;
 
 .loader {
   align-self: center;
@@ -6,13 +6,13 @@
 }
 
 .coin-list-page {
-  @include container;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: center;
   gap: 10px;
   background-color: #f8f9fa;
+  width: 100%;
   overflow: hidden;
 }
 
@@ -22,6 +22,22 @@
   display: flex;
   justify-content: space-between;
   gap: 10px;
+}
+.coin-list__search {
+  @include container;
+  padding-bottom: 0;
+}
+.coin-list__categories {
+  @include container;
+  padding-bottom: 0;
+}
+.coin-list__tabs {
+  @include container;
+  padding-bottom: 0;
+}
+
+.coin-list__tabs {
+  border-bottom: 1px solid #dfe2e4;
 }
 
 .coin-list__search {
@@ -43,7 +59,9 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding-right: 10px;
+  @include container;
+  padding-top: 7px;
+  padding-bottom: 0;
 
   &::-webkit-scrollbar {
     width: 1em;
@@ -59,4 +77,14 @@
     background-clip: padding-box;
     background-color: darkgrey;
   }
+}
+.tabs__item {
+  cursor: pointer;
+  color: #6c757d;
+  text-decoration: none;
+}
+.active {
+  border-bottom: 3px solid #0063f5;
+  color: #0063f5;
+  text-decoration: none;
 }
