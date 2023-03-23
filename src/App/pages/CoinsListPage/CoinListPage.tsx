@@ -140,7 +140,7 @@ function CoinListPage() {
           className={({ isActive }) =>
             isActive ? styles.active : styles.tabs__item
           }
-          to={"/gainer"}
+          to={"/gainers"}
         >
           Gainer
         </NavLink>
@@ -148,7 +148,7 @@ function CoinListPage() {
           className={({ isActive }) =>
             isActive ? styles.active : styles.tabs__item
           }
-          to={"/loser"}
+          to={"/losers"}
         >
           Loser
         </NavLink>

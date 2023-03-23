@@ -1,96 +1,106 @@
 @font-face {
-    font-family: 'Circular Std';
-    src: url('CircularStd-MediumItalic.eot');
-    src: local('Circular Std Medium Italic'), local('CircularStd-MediumItalic'),
-        url('CircularStd-MediumItalic.eot?#iefix') format('embedded-opentype'),
-        url('CircularStd-MediumItalic.woff2') format('woff2'),
-        url('CircularStd-MediumItalic.woff') format('woff'),
-        url('CircularStd-MediumItalic.ttf') format('truetype');
-    font-weight: 500;
-    font-style: italic;
+  font-style: italic;
+  font-weight: 500;
+  src: url("/src/styles/CircularStd/CircularStd-MediumItalic.eot");
+  src: local("Circular Std Medium Italic"), local("CircularStd-MediumItalic"),
+    url("/src/styles/CircularStd/CircularStd-MediumItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/src/styles/CircularStd/CircularStd-MediumItalic.woff2")
+      format("woff2"),
+    url("/src/styles/CircularStd/CircularStd-MediumItalic.woff") format("woff"),
+    url("/src/styles/CircularStd/CircularStd-MediumItalic.ttf")
+      format("truetype");
+  font-family: "Circular Std";
 }
 
 @font-face {
-    font-family: 'Circular Std';
-    src: url('CircularStd-Black.eot');
-    src: local('Circular Std Black'), local('CircularStd-Black'),
-        url('CircularStd-Black.eot?#iefix') format('embedded-opentype'),
-        url('CircularStd-Black.woff2') format('woff2'),
-        url('CircularStd-Black.woff') format('woff'),
-        url('CircularStd-Black.ttf') format('truetype');
-    font-weight: 900;
-    font-style: normal;
+  font-style: normal;
+  font-weight: 900;
+  src: url("/src/styles/CircularStd/CircularStd-Black.eot");
+  src: local("Circular Std Black"), local("CircularStd-Black"),
+    url("/src/styles/CircularStd/CircularStd-Black.eot?#iefix")
+      format("embedded-opentype"),
+    url("/src/styles/CircularStd/CircularStd-Black.woff2") format("woff2"),
+    url("/src/styles/CircularStd/CircularStd-Black.woff") format("woff"),
+    url("/src/styles/CircularStd/CircularStd-Black.ttf") format("truetype");
+  font-family: "Circular Std";
 }
 
 @font-face {
-    font-family: 'Circular Std';
-    src: url('CircularStd-Medium.eot');
-    src: local('Circular Std Medium'), local('CircularStd-Medium'),
-        url('CircularStd-Medium.eot?#iefix') format('embedded-opentype'),
-        url('CircularStd-Medium.woff2') format('woff2'),
-        url('CircularStd-Medium.woff') format('woff'),
-        url('CircularStd-Medium.ttf') format('truetype');
-    font-weight: 500;
-    font-style: normal;
+  font-style: normal;
+  font-weight: 500;
+  src: url("/src/styles/CircularStd/CircularStd-Medium.eot");
+  src: local("Circular Std Medium"), local("CircularStd-Medium"),
+    url("/src/styles/CircularStd/CircularStd-Medium.eot?#iefix")
+      format("embedded-opentype"),
+    url("/src/styles/CircularStd/CircularStd-Medium.woff2") format("woff2"),
+    url("/src/styles/CircularStd/CircularStd-Medium.woff") format("woff"),
+    url("/src/styles/CircularStd/CircularStd-Medium.ttf") format("truetype");
+  font-family: "Circular Std";
 }
 
 @font-face {
-    font-family: 'Circular Std';
-    src: url('CircularStd-Bold.eot');
-    src: local('Circular Std Bold'), local('CircularStd-Bold'),
-        url('CircularStd-Bold.eot?#iefix') format('embedded-opentype'),
-        url('CircularStd-Bold.woff2') format('woff2'),
-        url('CircularStd-Bold.woff') format('woff'),
-        url('CircularStd-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
+  font-style: normal;
+  font-weight: bold;
+  src: url("/src/styles/CircularStd/CircularStd-Bold.eot");
+  src: local("Circular Std Bold"), local("CircularStd-Bold"),
+    url("/src/styles/CircularStd/CircularStd-Bold.eot?#iefix")
+      format("embedded-opentype"),
+    url("/src/styles/CircularStd/CircularStd-Bold.woff2") format("woff2"),
+    url("/src/styles/CircularStd/CircularStd-Bold.woff") format("woff"),
+    url("/src/styles/CircularStd/CircularStd-Bold.ttf") format("truetype");
+  font-family: "Circular Std";
 }
 
 @font-face {
-    font-family: 'Circular Std';
-    src: url('CircularStd-BlackItalic.eot');
-    src: local('Circular Std Black Italic'), local('CircularStd-BlackItalic'),
-        url('CircularStd-BlackItalic.eot?#iefix') format('embedded-opentype'),
-        url('CircularStd-BlackItalic.woff2') format('woff2'),
-        url('CircularStd-BlackItalic.woff') format('woff'),
-        url('CircularStd-BlackItalic.ttf') format('truetype');
-    font-weight: 900;
-    font-style: italic;
+  font-style: italic;
+  font-weight: 900;
+  src: url("/src/styles/CircularStd/CircularStd-BlackItalic.eot");
+  src: local("Circular Std Black Italic"), local("CircularStd-BlackItalic"),
+    url("/src/styles/CircularStd/CircularStd-BlackItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/src/styles/CircularStd/CircularStd-BlackItalic.woff2") format("woff2"),
+    url("/src/styles/CircularStd/CircularStd-BlackItalic.woff") format("woff"),
+    url("/src/styles/CircularStd/CircularStd-BlackItalic.ttf")
+      format("truetype");
+  font-family: "Circular Std";
 }
 
 @font-face {
-    font-family: 'Circular Std Book';
-    src: url('CircularStd-BookItalic.eot');
-    src: local('Circular Std Book Italic'), local('CircularStd-BookItalic'),
-        url('CircularStd-BookItalic.eot?#iefix') format('embedded-opentype'),
-        url('CircularStd-BookItalic.woff2') format('woff2'),
-        url('CircularStd-BookItalic.woff') format('woff'),
-        url('CircularStd-BookItalic.ttf') format('truetype');
-    font-weight: normal;
-    font-style: italic;
+  font-style: italic;
+  font-weight: normal;
+  src: url("/src/styles/CircularStd/CircularStd-BookItalic.eot");
+  src: local("Circular Std Book Italic"), local("CircularStd-BookItalic"),
+    url("/src/styles/CircularStd/CircularStd-BookItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/src/styles/CircularStd/CircularStd-BookItalic.woff2") format("woff2"),
+    url("/src/styles/CircularStd/CircularStd-BookItalic.woff") format("woff"),
+    url("/src/styles/CircularStd/CircularStd-BookItalic.ttf") format("truetype");
+  font-family: "Circular Std Book";
 }
 
 @font-face {
-    font-family: 'Circular Std';
-    src: url('CircularStd-BoldItalic.eot');
-    src: local('Circular Std Bold Italic'), local('CircularStd-BoldItalic'),
-        url('CircularStd-BoldItalic.eot?#iefix') format('embedded-opentype'),
-        url('CircularStd-BoldItalic.woff2') format('woff2'),
-        url('CircularStd-BoldItalic.woff') format('woff'),
-        url('CircularStd-BoldItalic.ttf') format('truetype');
-    font-weight: bold;
-    font-style: italic;
+  font-style: italic;
+  font-weight: bold;
+  src: url("/src/styles/CircularStd/CircularStd-BoldItalic.eot");
+  src: local("Circular Std Bold Italic"), local("CircularStd-BoldItalic"),
+    url("/src/styles/CircularStd/CircularStd-BoldItalic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/src/styles/CircularStd/CircularStd-BoldItalic.woff2") format("woff2"),
+    url("/src/styles/CircularStd/CircularStd-BoldItalic.woff") format("woff"),
+    url("/src/styles/CircularStd/CircularStd-BoldItalic.ttf") format("truetype");
+  font-family: "Circular Std";
 }
 
 @font-face {
-    font-family: 'Circular Std Book';
-    src: url('CircularStd-Book.eot');
-    src: local('Circular Std Book'), local('CircularStd-Book'),
-        url('CircularStd-Book.eot?#iefix') format('embedded-opentype'),
-        url('CircularStd-Book.woff2') format('woff2'),
-        url('CircularStd-Book.woff') format('woff'),
-        url('CircularStd-Book.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-style: normal;
+  font-weight: normal;
+  src: url("/src/styles/CircularStd/CircularStd-Book.eot");
+  src: local("Circular Std Book"), local("CircularStd-Book"),
+    url("/src/styles/CircularStd/CircularStd-Book.eot?#iefix")
+      format("embedded-opentype"),
+    url("/src/styles/CircularStd/CircularStd-Book.woff2") format("woff2"),
+    url("/src/styles/CircularStd/CircularStd-Book.woff") format("woff"),
+    url("/src/styles/CircularStd/CircularStd-Book.ttf") format("truetype");
+  font-family: "Circular Std Book";
 }
-

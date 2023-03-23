@@ -33,6 +33,7 @@
 }
 .coin-list__tabs {
   @include container;
+  justify-content: space-around;
   padding-bottom: 0;
 }
 

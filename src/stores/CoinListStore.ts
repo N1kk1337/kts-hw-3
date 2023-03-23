@@ -1,6 +1,5 @@
 import axios from "axios";
 import { BASE_URL } from "config/api";
-import { CoinData } from "models/types";
 import {
   action,
   computed,
@@ -10,6 +9,7 @@ import {
   reaction,
   runInAction,
 } from "mobx";
+import { CoinData } from "models/types";
 import { Meta } from "utils/meta";
 
 import rootStore from "./RootStore/instance";
@@ -35,6 +35,8 @@ class CoinListStore implements ILocalStore {
       list: computed,
       currency: computed,
       getCoinListData: action.bound,
+      filterGainers: action.bound,
+      filterLosers: action.bound,
     });
   }
 
@@ -52,6 +54,17 @@ class CoinListStore implements ILocalStore {
 
   get currency(): string {
     return this._currency;
+  }
+
+  filterLosers() {
+    this._list = this._list.filter(
+      (item) => parseInt(item.price_change_percentage_24h) < 0,
+    );
+  }
+  filterGainers() {
+    this._list = this._list.filter(
+      (item) => parseInt(item.price_change_percentage_24h) > 0,
+    );
   }
 
   getNextPage(search: string, categories: string[]) {
